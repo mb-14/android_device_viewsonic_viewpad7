@@ -56,7 +56,9 @@ return 0;
 
 char value[20];
 int fd = open("/sys/module/g_android/parameters/product_id", O_RDWR);
+<<<<<<< HEAD
 int count = snprintf(value, sizeof(value), "%s\n", (enable ? "c001" : "c004"));
+
 write(fd, value, count);
 close(fd);
 return 0;
@@ -68,4 +70,5 @@ bool UsbController::isRNDISStarted() {
     read(fd, &value, 5);
     close(fd);
     return (!strncmp(value,"c001",4) ? true : false);
+
 }
