@@ -14,13 +14,31 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x0ab80000
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 TARGET_PREBUILT_KERNEL := device/fih/fm6/kernel
+#RECOVERY
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/fih/fm6/recovery/recovery_ui.c
+TARGET_RECOVERY_INITRC := device/fih/fm6/recovery.rc
 #BOARD_HAS_NO_SELECT_BUTTON := true
 
-#usb mass storage 
+#USB MASS STORAGE 
+BOARD_CUSTOM_USB_CONTROLLER := ../../device/fih/fm6/UsbController.cpp
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun"
 BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
+
+BOARD_USES_QCOM_HARDWARE := true
+BOARD_USES_QCOM_LIBS := true
+BOARD_USES_QCOM_LIBRPC := true
+BOARD_HAVE_BLUETOOTH := true
+
+TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
+
+JS_ENGINE := v8
+
+TARGET_PROVIDES_LIBAUDIO := true
+TARGET_PROVIDES_LIBRIL := true
+
+TARGET_USES_OLD_LIBSENSORS_HAL:=true
+TARGET_HAS_FOXCONN_SENSORS:=true
 
 
 # Use this flag if the board has a ext4 partition larger than 2gb
