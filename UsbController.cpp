@@ -52,13 +52,11 @@ int fdums = open("/sys/devices/platform/msm_hsusb/gadget/lun0/file", O_RDWR);
 read(fdums, &ums, 1);
 close(fdums);
 if (ums == '/')
-return 0;
+    return 0;
 
 char value[20];
 int fd = open("/sys/module/g_android/parameters/product_id", O_RDWR);
-<<<<<<< HEAD
 int count = snprintf(value, sizeof(value), "%s\n", (enable ? "c001" : "c004"));
-
 write(fd, value, count);
 close(fd);
 return 0;

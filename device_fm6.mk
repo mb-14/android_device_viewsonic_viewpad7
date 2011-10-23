@@ -6,9 +6,12 @@ DEVICE_PACKAGE_OVERLAYS += device/fih/fm6/overlay
 
 # HAL libs and other system binaries
 PRODUCT_PACKAGES += \
-    hwprops \
+    copybit.fm6 \
+    libOmxVidEnc \
+    gps.fm6 \
     copybit.fm6 \
     gralloc.fm6 \
+    lights.msm7k \
     libOmxCore
 
 
@@ -36,11 +39,11 @@ PRODUCT_COPY_FILES += \
 
 # Board-specific init
 PRODUCT_COPY_FILES += \
-    device/fih/fm6/init.qcom.rc:root/init.qcom.rc
+    device/fih/fm6/include/init.qcom.rc:root/init.qcom.rc \
+    device/fih/fm6/ueventd.qct.rc:root/ueventd.qct.rc 
 
 ## RIL related stuff
 PRODUCT_COPY_FILES += \
-    device/fih/fm6/spn-conf.xml:system/etc/spn-conf.xml \
     vendor/fih/fm6/proprietary/bin/qmuxd:system/bin/qmuxd \
     vendor/fih/fm6/proprietary/lib/liboncrpc.so:system/lib/liboncrpc.so \
     vendor/fih/fm6/proprietary/lib/libmmgsdilib.so:system/lib/libmmgsdilib.so \
@@ -105,15 +108,15 @@ PRODUCT_COPY_FILES += \
     device/fih/fm6/prebuilt/init.qcom.bt.sh:system/bin/init.qcom.bt.sh \
     vendor/fih/fm6/proprietary/lib/libms3c_yamaha.so:system/lib/libms3c_yamaha.so \
     vendor/fih/fm6/proprietary/lib/libsensor_yamaha.so:system/lib/libsensor_yamaha.so \
-    device/fih/fm6/ms3c_charger_offset.cfg:system/etc/ms3c_charger_offset.cfg \
-    device/fih/fm6/ms3c_transformation.cfg:system/etc/ms3c_transformation.cfg \
+    device/fih/fm6/include/ms3c_charger_offset.cfg:system/etc/ms3c_charger_offset.cfg \
+    device/fih/fm6/include/ms3c_transformation.cfg:system/etc/ms3c_transformation.cfg \
     vendor/fih/fm6/proprietary/bin/updateSensorNV:system/bin/updateSensorNV \
     vendor/fih/fm6/proprietary/bin/sensorserver_yamaha:system/bin/sensorserver_yamaha \
     vendor/fih/fm6/proprietary/lib/hw/sensors.qcom.so:system/lib/hw/sensors.qcom.so \
     vendor/fih/fm6/proprietary/bin/gsensorcalibration:system/bin/gsensorcalibration \
     device/fih/fm6/prebuilt/SensorCalibration.apk:system/app/SensorCalibration.apk \
-    device/fih/fm6/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
-    device/fih/fm6/AudioFilter.csv:system/etc/AudioFilter.csv \
+    device/fih/fm6/include/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
+    device/fih/fm6/include/AudioFilter.csv:system/etc/AudioFilter.csv \
     vendor/fih/fm6/proprietary/lib/liba2dp.so:system/lib/liba2dp.so \
     vendor/fih/fm6/proprietary/lib/libaudioeq.so:system/lib/libaudioeq.so \
     vendor/fih/fm6/proprietary/lib/egl/egl.cfg:system/lib/egl/egl.cfg \
@@ -126,11 +129,11 @@ PRODUCT_COPY_FILES += \
     vendor/fih/fm6/proprietary/lib/libgsl.so:system/lib/libgsl.so
 
 PRODUCT_COPY_FILES += \
-    device/fih/fm6/media_profiles.xml:system/etc/media_profiles.xml \
-    device/fih/fm6/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
-    device/fih/fm6/vold.fstab:system/etc/vold.fstab \
-    device/fih/fm6/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    device/fih/fm6/7x27_kybd.kl:system/usr/keylayout/7x27_kybd.kl
+    device/fih/fm6/include/media_profiles.xml:system/etc/media_profiles.xml \
+    device/fih/fm6/include/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
+    device/fih/fm6/include/vold.fstab:system/etc/vold.fstab \
+    device/fih/fm6/include/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    device/fih/fm6/include/7x27_kybd.kl:system/usr/keylayout/7x27_kybd.kl
 
 
 $(call inherit-product, build/target/product/full_base.mk)
@@ -139,3 +142,4 @@ PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := fm6
 PRODUCT_DEVICE := fm6
 PRODUCT_MODEL := fm6
+PRODUCT_MANUFACTURER := fih
