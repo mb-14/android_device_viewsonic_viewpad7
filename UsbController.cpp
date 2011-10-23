@@ -56,7 +56,6 @@ return 0;
 
 char value[20];
 int fd = open("/sys/module/g_android/parameters/product_id", O_RDWR);
-<<<<<<< HEAD
 int count = snprintf(value, sizeof(value), "%s\n", (enable ? "c001" : "c004"));
 
 write(fd, value, count);
