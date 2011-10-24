@@ -1,32 +1,31 @@
-# Copyright (c) 2009-2010, Code Aurora Forum. All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#     * Redistributions of source code must retain the above copyright
-#       notice, this list of conditions and the following disclaimer.
-#     * Redistributions in binary form must reproduce the above copyright
-#       notice, this list of conditions and the following disclaimer in the
-#       documentation and/or other materials provided with the distribution.
-#     * Neither the name of Code Aurora nor
-#       the names of its contributors may be used to endorse or promote
-#       products derived from this software without specific prior written
-#       permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-# IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NON-INFRINGEMENT ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
-# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
-# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
+on fs
+
+    mkdir /misc
+    mount yaffs2 mtd@misc /misc nosuid nodev
+    chown system system /misc
+    chmod 0777 /misc
+    mkdir /misc/sensor 0777 system system
+    mkdir /misc/ms3c 0775 system system
+
+    mkdir /misc2
+    mount yaffs2 mtd@misc2 /misc2 nosuid nodev
+    chown system system /misc2
+    chmod 0777 /misc2
+
+    chmod 666 /dev/oncrpc/3000000e:00060000
+
+    ## Copy stock files to a writeable location
+    copy /system/etc/ms3c_transformation.cfg /misc/ms3c/transformation.cf
+    copy /system/etc/ms3c_charger_offset.cfg /misc/ms3c/charger_offset.cf
+    chown system system /misc/ms3c/transformation.cf
+    chown system system /misc/ms3c/charger_offset.cf
+
 
 on boot-pause
     exec system/bin/battery_charging
+
+on early-init
+    start hwprops
 
 on property:dev.bootcomplete=1
 #+++FIH_misty enable keypad interrupt until boot complete
@@ -59,6 +58,7 @@ on boot
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
     chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
 
+
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
@@ -67,8 +67,13 @@ on boot
     chown dhcp dhcp /data/misc/dhcp
     symlink /persist/qcom_wlan_nv.bin /etc/firmware/wlan/qcom_wlan_nv.bin
     setprop wifi.interface wlan0
-
-     # Create directories for wiper services
+     
+    ## Needed because sensor_server runs as system
+    chmod 666 /dev/compass
+    ## Calibration is done by a userspace app
+    chmod 666 /sys/module/fihsensor/parameters/gsensorCalibStart
+     
+    # Create directories for wiper services
     mkdir /data/wpstiles/ 0777 shell
     mkdir /etc/wiper 0777 location qcom_oncrpc
 
@@ -94,6 +99,11 @@ service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p10 /dev/block/mmc
 
 on property:ro.emmc=1
     start rmt_storage
+
+service hwprops /sbin/hwprops
+    critical
+    disabled
+    oneshot
 
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     user bluetooth
@@ -142,6 +152,10 @@ service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
 service qcom-sh /system/bin/sh /init.qcom.sh
     user root
     oneshot
+
+service netd /system/bin/netd
+   socket netd stream 0660 root system
+   socket dnsproxyd stream 0660 root inet
 
 service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
     user root

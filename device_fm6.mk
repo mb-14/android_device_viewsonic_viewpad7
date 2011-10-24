@@ -2,17 +2,17 @@
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
-DEVICE_PACKAGE_OVERLAYS += device/fih/fm6/overlay
 
 # HAL libs and other system binaries
 PRODUCT_PACKAGES += \
-    copybit.fm6 \
-    libOmxVidEnc \
-    gps.fm6 \
-    copybit.fm6 \
-    gralloc.fm6 \
-    lights.msm7k \
-    libOmxCore
+                copybit.fm6 \
+                libOmxVidEnc \
+                gps.fm6 \
+                hwprops \
+                copybit.fm6 \
+                gralloc.fm6 \
+                lights.msm7k \
+                libOmxCore
 
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
@@ -40,7 +40,7 @@ PRODUCT_COPY_FILES += \
 # Board-specific init
 PRODUCT_COPY_FILES += \
     device/fih/fm6/include/init.qcom.rc:root/init.qcom.rc \
-    device/fih/fm6/ueventd.qct.rc:root/ueventd.qct.rc 
+    device/fih/fm6/include/ueventd.qct.rc:root/ueventd.qct.rc 
 
 ## RIL related stuff
 PRODUCT_COPY_FILES += \
@@ -134,6 +134,7 @@ PRODUCT_COPY_FILES += \
     device/fih/fm6/include/vold.fstab:system/etc/vold.fstab \
     device/fih/fm6/include/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     device/fih/fm6/include/7x27_kybd.kl:system/usr/keylayout/7x27_kybd.kl
+
 
 
 $(call inherit-product, build/target/product/full_base.mk)
