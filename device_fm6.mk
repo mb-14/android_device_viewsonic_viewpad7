@@ -2,6 +2,7 @@
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
+DEVICE_PACKAGE_OVERLAYS += device/fih/fm6/overlay
 
 # HAL libs and other system binaries
 PRODUCT_PACKAGES += \
