@@ -7,13 +7,11 @@ DEVICE_PACKAGE_OVERLAYS += device/fih/fm6/overlay
 # HAL libs and other system binaries
 PRODUCT_PACKAGES += \
                 copybit.fm6 \
-                libOmxVidEnc \
                 gps.fm6 \
                 hwprops \
                 copybit.fm6 \
                 gralloc.fm6 \
-                lights.msm7k \
-                libOmxCore
+                lights.msm7k 
 
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)

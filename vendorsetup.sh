@@ -22,3 +22,4 @@
 
 add_lunch_combo full_fm6-userdebug
 add_lunch_combo full_fm6-eng
+add_lunch_combo cyanogen_fm6-eng
