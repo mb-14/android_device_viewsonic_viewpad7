@@ -6,6 +6,7 @@ TARGET_NO_BOOTLOADER := true
 TARGET_BOARD_PLATFORM := msm7k
 TARGET_CPU_ABI := armeabi
 TARGET_BOOTLOADER_BOARD_NAME := fm6
+TARGET_USES_2G_VM_SPLIT := true
 
 # fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00500000
