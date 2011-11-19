@@ -1,11 +1,13 @@
+LOCAL_PATH:= $(call my-dir)
+
 USE_CAMERA_STUB := false
-BOARD_USE_FROYO_LIBCAMERA := true
 
 #CPU
 TARGET_NO_BOOTLOADER := true
 TARGET_BOARD_PLATFORM := msm7k
 TARGET_CPU_ABI := armeabi
 TARGET_BOOTLOADER_BOARD_NAME := fm6
+TARGET_ARCH_VARIANT := armv6-vfp
 TARGET_USES_2G_VM_SPLIT := true
 
 # fix this up by examining /proc/mtd on a running device
@@ -24,7 +26,7 @@ BOARD_PAGE_SIZE := 0x00000800
 
 #Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/fih/fm6/recovery/recovery_ui.c
-TARGET_RECOVERY_INITRC := device/fih/fm6/recovery.rc
+TARGET_RECOVERY_INITRC := device/fih/fm6/recovery/recovery.rc
 
 #GPS
 BOARD_GPS_LIBRARIES := libloc_api
@@ -33,7 +35,6 @@ BOARD_USES_QCOM_LIBS := true
 BOARD_USES_QCOM_GPS := true
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := fm6
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
-
 
 # Wifi
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
@@ -54,7 +55,7 @@ BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
 #QCOM
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_LIBS := true
-BOARD_USES_QCOM_LIBRPC := true
+TARGET_PROVIDES_LIBRIL := true
 
 #Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -64,11 +65,14 @@ BOARD_HAVE_BLUETOOTH := true
 TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 BOARD_EGL_CFG := device/fih/fm6/include/egl.cfg
-BOARD_NO_RGBX_8888 := true
+
 
 
 #Browser
 JS_ENGINE := v8
+WITH_JIT := true
+ENABLE_JSC_JIT := true
+
 
 #Audio
 BOARD_USES_GENERIC_AUDIO := false

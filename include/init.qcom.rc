@@ -1,26 +1,3 @@
-on fs
-
-    mkdir /misc
-    mount yaffs2 mtd@misc /misc nosuid nodev
-    chown system system /misc
-    chmod 0777 /misc
-    mkdir /misc/sensor 0777 system system
-    mkdir /misc/ms3c 0775 system system
-
-    mkdir /misc2
-    mount yaffs2 mtd@misc2 /misc2 nosuid nodev
-    chown system system /misc2
-    chmod 0777 /misc2
-
-    chmod 666 /dev/oncrpc/3000000e:00060000
-
-    ## Copy stock files to a writeable location
-    copy /system/etc/ms3c_transformation.cfg /misc/ms3c/transformation.cf
-    copy /system/etc/ms3c_charger_offset.cfg /misc/ms3c/charger_offset.cf
-    chown system system /misc/ms3c/transformation.cf
-    chown system system /misc/ms3c/charger_offset.cf
-
-
 on boot-pause
     exec system/bin/battery_charging
 

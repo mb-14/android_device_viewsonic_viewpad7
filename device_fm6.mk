@@ -1,4 +1,3 @@
-
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
@@ -113,7 +112,6 @@ PRODUCT_COPY_FILES += \
     vendor/fih/fm6/proprietary/bin/sensorserver_yamaha:system/bin/sensorserver_yamaha \
     vendor/fih/fm6/proprietary/lib/hw/sensors.qcom.so:system/lib/hw/sensors.qcom.so \
     vendor/fih/fm6/proprietary/bin/gsensorcalibration:system/bin/gsensorcalibration \
-    device/fih/fm6/prebuilt/SensorCalibration.apk:system/app/SensorCalibration.apk \
     device/fih/fm6/include/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
     device/fih/fm6/include/AudioFilter.csv:system/etc/AudioFilter.csv \
     vendor/fih/fm6/proprietary/lib/liba2dp.so:system/lib/liba2dp.so \
