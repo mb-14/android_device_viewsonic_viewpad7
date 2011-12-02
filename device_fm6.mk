@@ -11,7 +11,7 @@ PRODUCT_PACKAGES += \
                 gralloc.fm6 \
                 libril.fm6 \
                 libcamera \
-                lights.fm6 \
+                lights.msm7k \
                 hwprops
                           
 ifeq ($(TARGET_PREBUILT_KERNEL),)
