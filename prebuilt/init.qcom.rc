@@ -1,5 +1,22 @@
-on boot-pause
-    exec system/bin/battery_charging
+on fs
+
+    mkdir /misc
+    mount yaffs2 mtd@misc /misc nosuid nodev
+    chown system system /misc
+    chmod 0777 /misc
+    mkdir /misc/sensor 0777 system system
+    mkdir /misc/ms3c 0775 system system
+
+    mkdir /misc2
+    mount yaffs2 mtd@misc2 /misc2 nosuid nodev
+    chown system system /misc2
+    chmod 0777 /misc2
+
+ ## Copy stock files to a writeable location
+    copy /system/etc/ms3c_transformation.cfg /misc/ms3c/transformation.cf
+    copy /system/etc/ms3c_charger_offset.cfg /misc/ms3c/charger_offset.cf
+    chown system system /misc/ms3c/transformation.cf
+    chown system system /misc/ms3c/charger_offset.cf
 
 on early-init
     start hwprops
@@ -42,8 +59,7 @@ on boot
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
-    symlink /persist/qcom_wlan_nv.bin /etc/firmware/wlan/qcom_wlan_nv.bin
-    setprop wifi.interface wlan0
+   
      
     ## Needed because sensor_server runs as system
     chmod 666 /dev/compass

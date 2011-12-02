@@ -21,7 +21,9 @@ LOCAL_SHARED_LIBRARIES := \
 
 LOCAL_CFLAGS :=
 
-LOCAL_MODULE:= libril
+LOCAL_MODULE:= libril.fm6
+LOCAL_MODULE_STEM := libril
+LOCAL_MODULE_TAGS := optional
 
 LOCAL_LDLIBS += -lpthread
 

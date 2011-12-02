@@ -56,7 +56,7 @@ int device_handle_key(int key_code, int visible) {
                 return HIGHLIGHT_DOWN;
 //Volume key bug fix
 //--------------------------------------------------------
-            case KEY_VOLUMEDOWN:
+            case KEY_VOLUMEUP:
                 count = count+1;
                 if (count == 2){
                  count = 0;
@@ -72,7 +72,7 @@ int device_handle_key(int key_code, int visible) {
                 return HIGHLIGHT_UP;
 //Volume key bug fix
 //---------------------------------------------------------
-           case KEY_VOLUMEUP:
+           case KEY_VOLUMEDOWN:
                 count1 = count1+1;
                 if (count1 == 2){
                   count1 = 0;

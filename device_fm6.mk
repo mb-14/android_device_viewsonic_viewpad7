@@ -7,12 +7,13 @@ DEVICE_PACKAGE_OVERLAYS += device/fih/fm6/overlay
 PRODUCT_PACKAGES += \
                 copybit.fm6 \
                 gps.fm6 \
-                hwprops \
                 copybit.fm6 \
                 gralloc.fm6 \
-                lights.msm7k 
-
-
+                libril.fm6 \
+                libcamera \
+                lights.fm6 \
+                hwprops
+                          
 ifeq ($(TARGET_PREBUILT_KERNEL),)
     LOCAL_KERNEL := device/fih/fm6/kernel
 else
@@ -37,8 +38,8 @@ PRODUCT_COPY_FILES += \
 
 # Board-specific init
 PRODUCT_COPY_FILES += \
-    device/fih/fm6/include/init.qcom.rc:root/init.qcom.rc \
-    device/fih/fm6/include/ueventd.qct.rc:root/ueventd.qct.rc 
+    device/fih/fm6/prebuilt/init.qcom.rc:root/init.qcom.rc \
+    device/fih/fm6/prebuilt/ueventd.qcom.rc:root/ueventd.qcom.rc 
 
 ## RIL related stuff
 PRODUCT_COPY_FILES += \
@@ -126,11 +127,11 @@ PRODUCT_COPY_FILES += \
     vendor/fih/fm6/proprietary/lib/libgsl.so:system/lib/libgsl.so
 
 PRODUCT_COPY_FILES += \
-    device/fih/fm6/include/media_profiles.xml:system/etc/media_profiles.xml \
-    device/fih/fm6/include/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
-    device/fih/fm6/include/vold.fstab:system/etc/vold.fstab \
-    device/fih/fm6/include/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    device/fih/fm6/include/7x27_kybd.kl:system/usr/keylayout/7x27_kybd.kl
+    device/fih/fm6/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
+    device/fih/fm6/prebuilt/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
+    device/fih/fm6/prebuilt/vold.fstab:system/etc/vold.fstab \
+    device/fih/fm6/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    device/fih/fm6/prebuilt/7x27_kybd.kl:system/usr/keylayout/7x27_kybd.kl
 
 
 
