@@ -37,7 +37,12 @@ then
 	write /sys/module/7x27_kybd_fm6/parameters/EnableKeyIntrrupt 1
 fi
 #---enable keypad interrupt until boot complete
+
 on boot
+     
+ ## cpufreq configurations
+    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 500000
+
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
@@ -80,18 +85,6 @@ on property:init.svc.bluetoothd=running
 on property:init.svc.bluetoothd=stopped
     stop btwlancoex
 
-service hci_qcomm_init /system/bin/log -t qcom-bluetooth -p i "hci_qcomm_init service requested"
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p10 /dev/block/mmcblk0p11
-    user root
-    disabled
-
-on property:ro.emmc=1
-    start rmt_storage
 
 service hwprops /sbin/hwprops
     critical
@@ -104,15 +97,7 @@ service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     disabled
     oneshot
 
-service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyGS0
-
 service qmuxd /system/bin/qmuxd
-
-service netmgrd /system/bin/netmgrd -E
-    disabled
-
-on property:ro.use_data_netmgrd=true
-    start netmgrd
 
 service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
     user root
@@ -131,34 +116,9 @@ service dhcpcd /system/bin/dhcpcd -BKL wlan0
     disabled
     oneshot
 
-service wiperiface /system/bin/wiperiface
-    user location
-    group qcom_oncrpc
-    oneshot
 
-service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
-    user system
-    group system
-    disabled
-    oneshot
-
-service qcom-sh /system/bin/sh /init.qcom.sh
+service sensor-daemon /system/bin/sensorserver_yamaha
+    #user compass
+    #user should be compass, but then we miss permissions to register the service
     user root
-    oneshot
-
-service netd /system/bin/netd
-   socket netd stream 0660 root system
-   socket dnsproxyd stream 0660 root inet
-
-service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
-    user root
-    disabled
-    oneshot
-
-on property:init.svc.bootanim=stopped
-    start qcom-post-boot
-
-### FM6F.FC-31: Disable to run CKPD-daemon in init.qcom.rc, by KangCC
-#service ckpd /system/bin/CKPD-daemon
-#    onrestart /system/bin/log -t RIL-CKPD -p w "CKPD daemon restarted"
-
+    group root
