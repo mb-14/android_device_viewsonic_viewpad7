@@ -61,7 +61,7 @@ BOARD_HAVE_BLUETOOTH := true
 # Graphics
 TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
-BOARD_EGL_CFG := device/fih/fm6/include/egl.cfg
+BOARD_EGL_CFG := device/fih/fm6/prebuilt/egl.cfg
 
 
 
