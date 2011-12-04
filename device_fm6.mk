@@ -11,7 +11,9 @@ PRODUCT_PACKAGES += \
                 gralloc.fm6 \
                 libril.fm6 \
                 libcamera \
+                libaudio \
                 lights.msm7k \
+                abtfilt \
                 hwprops
                           
 ifeq ($(TARGET_PREBUILT_KERNEL),)
@@ -107,14 +109,14 @@ PRODUCT_COPY_FILES += \
     device/fih/fm6/prebuilt/init.qcom.bt.sh:system/bin/init.qcom.bt.sh \
     vendor/fih/fm6/proprietary/lib/libms3c_yamaha.so:system/lib/libms3c_yamaha.so \
     vendor/fih/fm6/proprietary/lib/libsensor_yamaha.so:system/lib/libsensor_yamaha.so \
-    device/fih/fm6/include/ms3c_charger_offset.cfg:system/etc/ms3c_charger_offset.cfg \
-    device/fih/fm6/include/ms3c_transformation.cfg:system/etc/ms3c_transformation.cfg \
+    device/fih/fm6/prebuilt/ms3c_charger_offset.cfg:system/etc/ms3c_charger_offset.cfg \
+    device/fih/fm6/prebuilt/ms3c_transformation.cfg:system/etc/ms3c_transformation.cfg \
     vendor/fih/fm6/proprietary/bin/updateSensorNV:system/bin/updateSensorNV \
     vendor/fih/fm6/proprietary/bin/sensorserver_yamaha:system/bin/sensorserver_yamaha \
     vendor/fih/fm6/proprietary/lib/hw/sensors.qcom.so:system/lib/hw/sensors.qcom.so \
     vendor/fih/fm6/proprietary/bin/gsensorcalibration:system/bin/gsensorcalibration \
-    device/fih/fm6/include/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
-    device/fih/fm6/include/AudioFilter.csv:system/etc/AudioFilter.csv \
+    device/fih/fm6/prebuilt/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
+    device/fih/fm6/prebuilt/AudioFilter.csv:system/etc/AudioFilter.csv \
     vendor/fih/fm6/proprietary/lib/liba2dp.so:system/lib/liba2dp.so \
     vendor/fih/fm6/proprietary/lib/libaudioeq.so:system/lib/libaudioeq.so \
     vendor/fih/fm6/proprietary/lib/egl/egl.cfg:system/lib/egl/egl.cfg \
@@ -133,6 +135,23 @@ PRODUCT_COPY_FILES += \
     device/fih/fm6/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     device/fih/fm6/prebuilt/7x27_kybd.kl:system/usr/keylayout/7x27_kybd.kl \
     device/fih/fm6/prebuilt/init.qcom.coex.sh:system/etc/init.qcom.coex.sh
+
+#WiFi firmware
+PRODUCT_COPY_FILES += \
+    device/fih/fm6/firmware/calData_ar6102_15dBm.bin:system/wifi/calData_ar6102_15dBm.bin \
+    device/fih/fm6/firmware/data.patch.hw2_0.bin:system/wifi/data.patch.hw2_0.bin \
+    device/fih/fm6/firmware/athwlan.bin.z77:system/wifi/athwlan.bin.z77 \
+    device/fih/fm6/firmware/athtcmd_ram.bin:system/wifi/athtcmd_ram.bin
+
+#Kernel Modules
+PRODUCT_COPY_FILES += \
+    device/fih/fm6/prebuilt/ar6000.ko:system/wifi/ar6000.ko \
+    device/fih/fm6/prebuilt/ar6000.ko:system/wifi/ar6000-ap.ko \
+    device/fih/fm6/prebuilt/ar6000.ko:system/wifi/ar6000_tcmd.ko \
+    device/fih/fm6/prebuilt/cifs.ko:system/lib/modules/cifs.ko \
+    device/fih/fm6/prebuilt/libra.ko:system/lib/modules/libra.ko \
+    device/fih/fm6/prebuilt/librasdioif.ko:system/lib/modules/librasdioif.ko \
+    device/fih/fm6/prebuilt/nls_utf8.ko:system/lib/modules/nls_utf8.ko
 
 
 

@@ -26,21 +26,14 @@ BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/fih/fm6/recovery/recovery_ui.c
 TARGET_RECOVERY_INITRC := device/fih/fm6/recovery/recovery.rc
 
 #GPS
-BOARD_GPS_LIBRARIES := libloc_api
-BOARD_USES_QCOM_HARDWARE := true
-BOARD_USES_QCOM_LIBS := true
 BOARD_USES_QCOM_GPS := true
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := fm6
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
 
 # Wifi
-BOARD_WPA_SUPPLICANT_DRIVER := WEXT
-WPA_SUPPLICANT_VERSION := VER_0_6_X
-BOARD_WLAN_DEVICE := libra
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/libra.ko"
-WIFI_DRIVER_MODULE_NAME := "libra"
-WIFI_SDIO_IF_DRIVER_MODULE_PATH := "/system/lib/modules/librasdioif.ko"
-WIFI_SDIO_IF_DRIVER_MODULE_NAME := "librasdioif"
+BOARD_WPA_SUPPLICANT_DRIVER := AWEXT
+WIFI_DRIVER_MODULE_PATH := /system/wifi/ar6000.ko
+WIFI_DRIVER_MODULE_NAME := ar6000
 
 #USB Mass Storage 
 BOARD_CUSTOM_USB_CONTROLLER := ../../device/fih/fm6/UsbController.cpp
@@ -72,7 +65,6 @@ ENABLE_JSC_JIT := true
 
 
 #Audio
-BOARD_USES_GENERIC_AUDIO := false
 TARGET_PROVIDES_LIBAUDIO := true
 
 #Sensors

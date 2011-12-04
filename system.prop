@@ -2,6 +2,17 @@
 # system.prop for FM6
 #
 
+### FIH: additional build properties for Telephony
+ro.telephony.gsm.ecclist=110,112,119
+ro.telephony.cdma.ecclist=110,112,119,911
+ro.telephony.ecclist=08,000,110,112,118,119,911,999
+ro.telephony.fake.ecclist=110,119
+ro.telephony.num.auto.hyphen=true
+ro.telephony.gsm.spn.shortname=true
+ro.telephony.gsm.wait.switch=true
+
+### FIH: additional build properties for Applications
+ro.contacts.number.match.length=7
 
 rild.libpath=/system/lib/libril-qc-1.so
 rild.libargs=-d /dev/smd0

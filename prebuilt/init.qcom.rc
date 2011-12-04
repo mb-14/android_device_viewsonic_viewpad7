@@ -11,6 +11,8 @@ on fs
     mount yaffs2 mtd@misc2 /misc2 nosuid nodev
     chown system system /misc2
     chmod 0777 /misc2
+    
+    chmod 666 /dev/oncrpc/3000000e:00060000
 
  ## Copy stock files to a writeable location
     copy /system/etc/ms3c_transformation.cfg /misc/ms3c/transformation.cf
@@ -42,7 +44,10 @@ on boot
      
  ## cpufreq configurations
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 500000
-
+    
+    ## RIL needs this
+    mkdir /data/radio 0777
+   
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
@@ -65,10 +70,14 @@ on boot
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
    
-     
+    ## Wifi RFKill
+    chown wifi wifi /sys/class/rfkill/rfkill1/state
+    chmod 0660 /sys/class/rfkill/rfkill1/state
+
     ## Needed because sensor_server runs as system
     chmod 666 /dev/compass
     ## Calibration is done by a userspace app
+    chmod 666 /sys/module/fihsensor/parameters/bMagnetStartCalibration
     chmod 666 /sys/module/fihsensor/parameters/gsensorCalibStart
      
     # Create directories for wiper services
@@ -82,6 +91,9 @@ on property:init.svc.bluetoothd=running
     write /sys/devices/virtual/bluetooth/hci0/idle_timeout 7000
     start btwlancoex
 
+# Speed up SD Card
+    write /sys/block/mmcblk0/bdi/read_ahead_kb 2048
+
 on property:init.svc.bluetoothd=stopped
     stop btwlancoex
 
@@ -91,11 +103,18 @@ service hwprops /sbin/hwprops
     disabled
     oneshot
 
+service hci_qcomm_init /system/bin/log -t qcom-bluetooth -p i "hci_qcomm_init service requested"
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     user bluetooth
     group qcom_oncrpc bluetooth net_bt_admin
     disabled
     oneshot
+
 
 service qmuxd /system/bin/qmuxd
 
@@ -116,6 +135,9 @@ service dhcpcd /system/bin/dhcpcd -BKL wlan0
     disabled
     oneshot
 
+service abtfilt /system/bin/abtfilt -c -d -z -n
+    disabled
+    oneshot
 
 service sensor-daemon /system/bin/sensorserver_yamaha
     #user compass
