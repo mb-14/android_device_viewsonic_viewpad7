@@ -7,7 +7,6 @@ DEVICE_PACKAGE_OVERLAYS += device/fih/fm6/overlay
 PRODUCT_PACKAGES += \
                 copybit.fm6 \
                 gps.fm6 \
-                copybit.fm6 \
                 gralloc.fm6 \
                 libril.fm6 \
                 libcamera \
@@ -133,8 +132,7 @@ PRODUCT_COPY_FILES += \
     device/fih/fm6/prebuilt/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
     device/fih/fm6/prebuilt/vold.fstab:system/etc/vold.fstab \
     device/fih/fm6/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    device/fih/fm6/prebuilt/7x27_kybd.kl:system/usr/keylayout/7x27_kybd.kl \
-    device/fih/fm6/prebuilt/init.qcom.coex.sh:system/etc/init.qcom.coex.sh
+    device/fih/fm6/prebuilt/7x27_kybd.kl:system/usr/keylayout/7x27_kybd.kl 
 
 #WiFi firmware
 PRODUCT_COPY_FILES += \
