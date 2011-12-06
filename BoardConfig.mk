@@ -4,6 +4,8 @@ USE_CAMERA_STUB := false
 TARGET_NO_BOOTLOADER := true
 TARGET_BOARD_PLATFORM := msm7k
 TARGET_CPU_ABI := armeabi
+TARGET_CPU_ABI := armeabi-v6l
+TARGET_CPU_ABI2 := armeabi
 TARGET_BOOTLOADER_BOARD_NAME := fm6
 
 # fix this up by examining /proc/mtd on a running device
@@ -16,7 +18,7 @@ TARGET_OTA_ASSERT_DEVICE := fm6,viewpad7,vt100
 
 #kernel
 TARGET_PREBUILT_KERNEL := device/fih/fm6/kernel
-BOARD_KERNEL_CMDLINE := mem=216M console=null androidboot.hardware=qcom no_console_suspend
+BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom no_console_suspend
 BOARD_KERNEL_BASE := 0x13000000
 BOARD_PAGE_SIZE := 0x00000800
 
@@ -45,6 +47,7 @@ BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_LIBS := true
 TARGET_PROVIDES_LIBRIL := true
+TARGET_PROVIDES_LIBAUDIO := true
 
 #Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -54,10 +57,9 @@ BOARD_HAVE_BLUETOOTH := true
 TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 BOARD_EGL_CFG := device/fih/fm6/prebuilt/egl.cfg
-
-
-#Audio
-TARGET_PROVIDES_LIBAUDIO := true
+WITH_JIT := true
+ENABLE_JSC_JIT := true
+JS_ENGINE := v8
 
 #Sensors
 TARGET_USES_OLD_LIBSENSORS_HAL:=true
