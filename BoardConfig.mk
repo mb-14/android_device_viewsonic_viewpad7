@@ -17,7 +17,7 @@ TARGET_OTA_ASSERT_DEVICE := fm6,viewpad7,vt100
 
 #kernel
 TARGET_PREBUILT_KERNEL := device/fih/fm6/kernel
-BOARD_KERNEL_CMDLINE := 
+BOARD_KERNEL_CMDLINE := mem=216M console=null androidboot.hardware=qcom no_console_suspend
 BOARD_KERNEL_BASE := 0x13000000
 BOARD_PAGE_SIZE := 0x00000800
 
@@ -55,13 +55,6 @@ BOARD_HAVE_BLUETOOTH := true
 TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 BOARD_EGL_CFG := device/fih/fm6/prebuilt/egl.cfg
-
-
-
-#Browser
-JS_ENGINE := v8
-WITH_JIT := true
-ENABLE_JSC_JIT := true
 
 
 #Audio
