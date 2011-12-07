@@ -2,10 +2,10 @@ USE_CAMERA_STUB := false
 
 #CPU
 TARGET_NO_BOOTLOADER := true
+TARGET_ARCH_VARIANT := armv6
 TARGET_BOARD_PLATFORM := msm7k
 TARGET_CPU_ABI := armeabi
-TARGET_CPU_ABI := armeabi-v6l
-TARGET_CPU_ABI2 := armeabi
+TARGET_USES_2G_VM_SPLIT := true
 TARGET_BOOTLOADER_BOARD_NAME := fm6
 
 # fix this up by examining /proc/mtd on a running device
@@ -18,7 +18,7 @@ TARGET_OTA_ASSERT_DEVICE := fm6,viewpad7,vt100
 
 #kernel
 TARGET_PREBUILT_KERNEL := device/fih/fm6/kernel
-BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom no_console_suspend
+BOARD_KERNEL_CMDLINE := 
 BOARD_KERNEL_BASE := 0x13000000
 BOARD_PAGE_SIZE := 0x00000800
 
@@ -32,8 +32,8 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := fm6
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
 
 # Wifi
-BOARD_WPA_SUPPLICANT_DRIVER := AWEXT
-WIFI_DRIVER_MODULE_PATH := /system/wifi/ar6000.ko
+BOARD_WPA_SUPPLICANT_DRIVER := WEXT
+WIFI_DRIVER_MODULE_PATH := rfkill
 WIFI_DRIVER_MODULE_NAME := ar6000
 
 #USB Mass Storage 
@@ -56,9 +56,8 @@ BOARD_HAVE_BLUETOOTH := true
 # Graphics
 TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
-BOARD_EGL_CFG := device/fih/fm6/prebuilt/egl.cfg
-WITH_JIT := true
-ENABLE_JSC_JIT := true
+BOARD_NO_RGBX_8888 := true
+
 JS_ENGINE := v8
 
 #Sensors

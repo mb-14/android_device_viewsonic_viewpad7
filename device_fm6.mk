@@ -8,12 +8,10 @@ PRODUCT_PACKAGES += \
                 copybit.fm6 \
                 gps.fm6 \
                 gralloc.fm6 \
-                libril.fm6 \
-                libcamera \
-                libaudio \
-                lights.msm7k \
                 abtfilt \
-                hwprops
+                lights.msm7k\
+                hwprops \
+                libOmxCore
                           
 ifeq ($(TARGET_PREBUILT_KERNEL),)
     LOCAL_KERNEL := device/fih/fm6/kernel
