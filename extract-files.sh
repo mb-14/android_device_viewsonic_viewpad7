@@ -19,6 +19,7 @@ bin/qmuxd
 bin/sensorserver_yamaha
 bin/updateSensorNV
 bin/gsensorcalibration
+bin/hciattach
 
 etc/firmware/yamato_pfp.fw
 etc/firmware/yamato_pm4.fw
@@ -35,7 +36,9 @@ lib/hw/gralloc.msm7k.so
 lib/hw/sensors.qcom.so
 
 lib/liba2dp.so
-lib/libaudioeq.so
+lib/libaudio.so
+lib/libaudiopolicy.so
+
 
 lib/libauth.so
 lib/libcm.so

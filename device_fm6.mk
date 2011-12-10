@@ -6,8 +6,8 @@ DEVICE_PACKAGE_OVERLAYS += device/fih/fm6/overlay
 # HAL libs and other system binaries
 PRODUCT_PACKAGES += \
                 copybit.fm6 \
-                gps.fm6 \
                 gralloc.fm6 \
+                gps.fm6 \
                 abtfilt \
                 lights.msm7k\
                 hwprops \
@@ -60,6 +60,9 @@ PRODUCT_COPY_FILES += \
     vendor/fih/fm6/proprietary/lib/libqueue.so:system/lib/libqueue.so \
     vendor/fih/fm6/proprietary/lib/libcm.so:system/lib/libcm.so \
     vendor/fih/fm6/proprietary/lib/libdll.so:system/lib/libdll.so \
+    vendor/fih/fm6/proprietary/lib/libaudiopolicy.so:system/lib/audiopolicy.so \
+    vendor/fih/fm6/proprietary/lib/libaudio.so:system/lib/libaudio.so \
+    vendor/fih/fm6/proprietary/lib/libril.so:system/lib/libril.so \
     vendor/fih/fm6/proprietary/lib/libril-qc-1.so:system/lib/libril-qc-1.so \
     vendor/fih/fm6/proprietary/lib/libril-qcril-hook-oem.so:system/lib/libril-qcril-hook-oem.so
 
@@ -103,9 +106,11 @@ PRODUCT_COPY_FILES += \
 ## Other libraries and proprietary binaries
 PRODUCT_COPY_FILES += \
     vendor/fih/fm6/proprietary/bin/hci_qcomm_init:system/bin/hci_qcomm_init \
+    vendor/fih/fm6/proprietary/bin/hciattach:system/bin/hciattach \
     device/fih/fm6/prebuilt/init.qcom.bt.sh:system/bin/init.qcom.bt.sh \
     vendor/fih/fm6/proprietary/lib/libms3c_yamaha.so:system/lib/libms3c_yamaha.so \
     vendor/fih/fm6/proprietary/lib/libsensor_yamaha.so:system/lib/libsensor_yamaha.so \
+    device/fih/fm6/prebuilt/SensorCalibration.apk:system/app/SensorCalibration.apk \
     device/fih/fm6/prebuilt/ms3c_charger_offset.cfg:system/etc/ms3c_charger_offset.cfg \
     device/fih/fm6/prebuilt/ms3c_transformation.cfg:system/etc/ms3c_transformation.cfg \
     vendor/fih/fm6/proprietary/bin/updateSensorNV:system/bin/updateSensorNV \
@@ -130,24 +135,25 @@ PRODUCT_COPY_FILES += \
     device/fih/fm6/prebuilt/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
     device/fih/fm6/prebuilt/vold.fstab:system/etc/vold.fstab \
     device/fih/fm6/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    device/fih/fm6/prebuilt/7x27_kybd.kl:system/usr/keylayout/7x27_kybd.kl 
+    device/fih/fm6/prebuilt/7x27_kybd.kl:system/usr/keylayout/7x27_kybd.kl \
+    device/fih/fm6/prebuilt/PANJIT_Touchscreen.kcm.bin:system/usr/keychars/PANJIT_Touchscreen.kcm.bin
 
 #WiFi firmware
 PRODUCT_COPY_FILES += \
     device/fih/fm6/firmware/calData_ar6102_15dBm.bin:system/wifi/calData_ar6102_15dBm.bin \
     device/fih/fm6/firmware/data.patch.hw2_0.bin:system/wifi/data.patch.hw2_0.bin \
     device/fih/fm6/firmware/athwlan.bin.z77:system/wifi/athwlan.bin.z77 \
-    device/fih/fm6/firmware/athtcmd_ram.bin:system/wifi/athtcmd_ram.bin
-
+    device/fih/fm6/firmware/athtcmd_ram.bin:system/wifi/athtcmd_ram.bin  \
+    device/fih/fm6/firmware/wlan/qcom_fw.bin:system/etc/firmware/wlan/qcom_fw.bin \
+    device/fih/fm6/firmware/wlan/qcom_nv.bin:system/etc/firmware/wlan/qcom_nv.bin \
+    device/fih/fm6/firmware/wlan/cfg.dat:system/etc/firmware/wlan/cfg.dat \
+    device/fih/fm6/firmware/wlan/qcom_cfg.ini:system/etc/firmware/wlan/qcom_cfg.ini 
+   
 #Kernel Modules
 PRODUCT_COPY_FILES += \
     device/fih/fm6/prebuilt/ar6000.ko:system/wifi/ar6000.ko \
-    device/fih/fm6/prebuilt/ar6000.ko:system/wifi/ar6000-ap.ko \
-    device/fih/fm6/prebuilt/ar6000.ko:system/wifi/ar6000_tcmd.ko \
-    device/fih/fm6/prebuilt/cifs.ko:system/lib/modules/cifs.ko \
-    device/fih/fm6/prebuilt/libra.ko:system/lib/modules/libra.ko \
-    device/fih/fm6/prebuilt/librasdioif.ko:system/lib/modules/librasdioif.ko \
-    device/fih/fm6/prebuilt/nls_utf8.ko:system/lib/modules/nls_utf8.ko
+    device/fih/fm6/prebuilt/ar6000-ap.ko:system/wifi/ar6000-ap.ko \
+    device/fih/fm6/prebuilt/ar6000_tcmd.ko:system/wifi/ar6000_tcmd.ko 
 
 
 

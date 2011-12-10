@@ -11,7 +11,8 @@ on fs
     mount yaffs2 mtd@misc2 /misc2 nosuid nodev
     chown system system /misc2
     chmod 0777 /misc2
-    
+    chown compass system /dev/cm3602_alsps
+    chmod 0666 /dev/cm3602_alsps
     chmod 666 /dev/oncrpc/3000000e:00060000
 
  ## Copy stock files to a writeable location
@@ -24,21 +25,9 @@ on early-init
     start hwprops
 
 on property:dev.bootcomplete=1
-#+++FIH_misty enable keypad interrupt until boot complete
-#    chmod 0666 /sys/module/7x27_kybd/parameters/EnableKeyIntrrupt
-#	write /sys/module/7x27_kybd/parameters/EnableKeyIntrrupt 1
-if [ -e /sys/module/7x27_kybd_f0x/parameters/EnableKeyIntrrupt ]
-then
-    chmod 0666 /sys/module/7x27_kybd_f0x/parameters/EnableKeyIntrrupt
-	write /sys/module/7x27_kybd_f0x/parameters/EnableKeyIntrrupt 1
-fi
 
-if [ -e /sys/module/7x27_kybd_fm6/parameters/EnableKeyIntrrupt ]
-then
     chmod 0666 /sys/module/7x27_kybd_fm6/parameters/EnableKeyIntrrupt
 	write /sys/module/7x27_kybd_fm6/parameters/EnableKeyIntrrupt 1
-fi
-#---enable keypad interrupt until boot complete
 
 on boot
      
@@ -69,7 +58,8 @@ on boot
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
-   
+    symlink /persist/qcom_wlan_nv.bin /etc/firmware/wlan/qcom_wlan_nv.bin
+
     ## Wifi RFKill
     chown wifi wifi /sys/class/rfkill/rfkill1/state
     chmod 0660 /sys/class/rfkill/rfkill1/state
@@ -77,6 +67,7 @@ on boot
     ## Needed because sensor_server runs as system
     chmod 666 /dev/compass
     ## Calibration is done by a userspace app
+    chmod 0666 /sys/module/LPSCM3602/parameters/fih_in_call
     chmod 666 /sys/module/fihsensor/parameters/bMagnetStartCalibration
     chmod 666 /sys/module/fihsensor/parameters/gsensorCalibStart
      
