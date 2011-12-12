@@ -21,7 +21,7 @@ TARGET_OTA_ASSERT_DEVICE := fm6,viewpad7,vt100
 
 #kernel
 TARGET_PREBUILT_KERNEL := device/fih/fm6/kernel
-BOARD_KERNEL_CMDLINE := 
+BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom no_console_suspend 
 BOARD_KERNEL_BASE := 0x13000000
 BOARD_PAGE_SIZE := 0x00000800
 
@@ -37,8 +37,8 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
 
 # Wifi
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
-WIFI_DRIVER_MODULE_PATH := rfkill
-WIFI_DRIVER_MODULE_NAME := ar6000
+WIFI_DRIVER_MODULE_PATH     := rfkill
+WIFI_DRIVER_MODULE_NAME     := ar6000
 
 #USB Mass Storage 
 BOARD_CUSTOM_USB_CONTROLLER := ../../device/fih/fm6/UsbController.cpp
@@ -50,6 +50,7 @@ BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
 #QCOM
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_LIBS := true
+TARGET_PROVIDES_LIBRIL := true
 
 #AUDIO
 BOARD_USES_GENERIC_AUDIO := false

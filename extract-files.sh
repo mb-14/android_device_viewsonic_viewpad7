@@ -30,8 +30,7 @@ lib/egl/libGLESv1_CM_adreno200.so
 lib/egl/libGLESv2_adreno200.so
 lib/egl/libq3dtools_adreno200.so
 
-lib/hw/gralloc.default.so
-lib/hw/gralloc.msm7k.so
+lib/hw/lights.qcom.so
 
 lib/hw/sensors.qcom.so
 

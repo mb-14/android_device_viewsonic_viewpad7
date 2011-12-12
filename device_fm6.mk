@@ -9,7 +9,6 @@ PRODUCT_PACKAGES += \
                 gralloc.fm6 \
                 gps.fm6 \
                 abtfilt \
-                lights.msm7k\
                 hwprops \
                 libOmxCore
                           
@@ -62,7 +61,6 @@ PRODUCT_COPY_FILES += \
     vendor/fih/fm6/proprietary/lib/libdll.so:system/lib/libdll.so \
     vendor/fih/fm6/proprietary/lib/libaudiopolicy.so:system/lib/audiopolicy.so \
     vendor/fih/fm6/proprietary/lib/libaudio.so:system/lib/libaudio.so \
-    vendor/fih/fm6/proprietary/lib/libril.so:system/lib/libril.so \
     vendor/fih/fm6/proprietary/lib/libril-qc-1.so:system/lib/libril-qc-1.so \
     vendor/fih/fm6/proprietary/lib/libril-qcril-hook-oem.so:system/lib/libril-qcril-hook-oem.so
 
@@ -89,7 +87,9 @@ PRODUCT_COPY_FILES += \
 ## Hardware properties 
 PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+ frameworks/base/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
     frameworks/base/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
+frameworks/base/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
     frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
@@ -116,6 +116,7 @@ PRODUCT_COPY_FILES += \
     vendor/fih/fm6/proprietary/bin/updateSensorNV:system/bin/updateSensorNV \
     vendor/fih/fm6/proprietary/bin/sensorserver_yamaha:system/bin/sensorserver_yamaha \
     vendor/fih/fm6/proprietary/lib/hw/sensors.qcom.so:system/lib/hw/sensors.qcom.so \
+    vendor/fih/fm6/proprietary/lib/hw/lights.qcom.so:system/lib/hw/lights.qcom.so \
     vendor/fih/fm6/proprietary/bin/gsensorcalibration:system/bin/gsensorcalibration \
     device/fih/fm6/prebuilt/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
     device/fih/fm6/prebuilt/AudioFilter.csv:system/etc/AudioFilter.csv \
@@ -140,21 +141,18 @@ PRODUCT_COPY_FILES += \
 
 #WiFi firmware
 PRODUCT_COPY_FILES += \
+    device/fih/fm6/prebuilt/eeprom.bin:system/etc/firmware/eeprom.bin \
     device/fih/fm6/firmware/calData_ar6102_15dBm.bin:system/wifi/calData_ar6102_15dBm.bin \
     device/fih/fm6/firmware/data.patch.hw2_0.bin:system/wifi/data.patch.hw2_0.bin \
     device/fih/fm6/firmware/athwlan.bin.z77:system/wifi/athwlan.bin.z77 \
-    device/fih/fm6/firmware/athtcmd_ram.bin:system/wifi/athtcmd_ram.bin  \
-    device/fih/fm6/firmware/wlan/qcom_fw.bin:system/etc/firmware/wlan/qcom_fw.bin \
-    device/fih/fm6/firmware/wlan/qcom_nv.bin:system/etc/firmware/wlan/qcom_nv.bin \
-    device/fih/fm6/firmware/wlan/cfg.dat:system/etc/firmware/wlan/cfg.dat \
-    device/fih/fm6/firmware/wlan/qcom_cfg.ini:system/etc/firmware/wlan/qcom_cfg.ini 
-   
+    device/fih/fm6/firmware/athtcmd_ram.bin:system/wifi/athtcmd_ram.bin \
+    device/fih/fm6/prebuilt/hostapd.conf:system/etc/wifi/hostapd.conf \
+    vendor/fih/fm6/proprietary/bin/hostapd:system/bin/hostapd
+
+
 #Kernel Modules
 PRODUCT_COPY_FILES += \
-    device/fih/fm6/prebuilt/ar6000.ko:system/wifi/ar6000.ko \
-    device/fih/fm6/prebuilt/ar6000-ap.ko:system/wifi/ar6000-ap.ko \
-    device/fih/fm6/prebuilt/ar6000_tcmd.ko:system/wifi/ar6000_tcmd.ko 
-
+    device/fih/fm6/prebuilt/ar6000.ko:system/wifi/ar6000.ko 
 
 
 $(call inherit-product, build/target/product/full_base.mk)

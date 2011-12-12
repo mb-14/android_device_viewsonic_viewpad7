@@ -24,10 +24,6 @@ on fs
 on early-init
     start hwprops
 
-on property:dev.bootcomplete=1
-
-    chmod 0666 /sys/module/7x27_kybd_fm6/parameters/EnableKeyIntrrupt
-	write /sys/module/7x27_kybd_fm6/parameters/EnableKeyIntrrupt 1
 
 on boot
      
@@ -51,6 +47,9 @@ on boot
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
     chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
 
+# delete DSPManager
+    exec /system/xbin/rm /system/app/DSPManager.apk
+
 
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -58,19 +57,27 @@ on boot
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
-    symlink /persist/qcom_wlan_nv.bin /etc/firmware/wlan/qcom_wlan_nv.bin
 
-    ## Wifi RFKill
+ ## Wifi RFKill
     chown wifi wifi /sys/class/rfkill/rfkill1/state
     chmod 0660 /sys/class/rfkill/rfkill1/state
 
     ## Needed because sensor_server runs as system
     chmod 666 /dev/compass
     ## Calibration is done by a userspace app
-    chmod 0666 /sys/module/LPSCM3602/parameters/fih_in_call
+    chmod 666 /sys/module/LPSCM3602/parameters/fih_in_call
     chmod 666 /sys/module/fihsensor/parameters/bMagnetStartCalibration
     chmod 666 /sys/module/fihsensor/parameters/gsensorCalibStart
      
+# SD card polling
+    chown system system /sys/module/g_android/parameters/product_id
+    chown system system /sys/devices/platform/msm_sdcc.1/polling
+    chown system system /sys/devices/platform/msm_sdcc.2/polling
+    chown system system /sys/devices/platform/msm_sdcc.3/polling
+    chown system system /sys/devices/platform/android_usb/composition
+    chown system system /sys/devices/platform/android_usb/remote_wakeup
+
+
     # Create directories for wiper services
     mkdir /data/wpstiles/ 0777 shell
     mkdir /etc/wiper 0777 location qcom_oncrpc
@@ -112,11 +119,18 @@ service wpa_supplicant /system/bin/wpa_supplicant -Dwext -iwlan0 -c/data/misc/wi
     disabled
     oneshot
 
-service dhcpcd /system/bin/dhcpcd -BKL wlan0
+service dhcpcd_wlan0 /system/bin/dhcpcd -B 
     disabled
     oneshot
 
 service abtfilt /system/bin/abtfilt -c -d -z -n
+    disabled
+    oneshot
+
+
+service hostapd /system/bin/logwrapper /system/bin/hostapd /data/misc/wifi/hostapd.conf
+    group wifi inet
+    socket wpa_athap0 dgram 660 wifi wifi
     disabled
     oneshot
 
@@ -125,3 +139,8 @@ service sensor-daemon /system/bin/sensorserver_yamaha
     #user should be compass, but then we miss permissions to register the service
     user root
     group root
+
+on property:dev.bootcomplete=1
+
+    chmod 0666 /sys/module/7x27_kybd_fm6/parameters/EnableKeyIntrrupt
+	write /sys/module/7x27_kybd_fm6/parameters/EnableKeyIntrrupt 1
