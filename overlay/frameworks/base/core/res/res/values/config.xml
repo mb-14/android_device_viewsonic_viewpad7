@@ -24,7 +24,7 @@
          config_hardware_automatic_brightness_available is not set, so we will use software implementation -->
     <bool name="config_automatic_brightness_available">true</bool>
 
-    <bool name="config_animateScreenLights">true</bool>
+    <bool name="config_animateScreenLights">false</bool>
 
     <bool name="config_disableMenuKeyInLockScreen">true</bool>
 
@@ -39,17 +39,19 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>200</item>
-        <item>400</item>
+        <item>10</item>
+        <item>300</item>
+        <item>500</item>
         <item>1000</item>
         <item>3000</item>
+        <item>8000</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
          in the config_autoBrightnessLevels array.  This array should have size one greater
          than the size of the config_autoBrightnessLevels array.
     -->
-      <integer-array name="config_autoBrightnessLcdBacklightValues">
+    <integer-array name="config_autoBrightnessLcdBacklightValues">
         <item>90</item>
         <item>110</item>
         <item>120</item>
@@ -64,8 +66,10 @@
          than the size of the config_autoBrightnessLevels array.
     -->
     <integer-array name="config_autoBrightnessButtonBacklightValues">
-        <item>255</item>
-        <item>255</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
         <item>0</item>
         <item>0</item>
         <item>0</item>
@@ -76,7 +80,9 @@
          than the size of the config_autoBrightnessLevels array.
     -->
     <integer-array name="config_autoBrightnessKeyboardBacklightValues">
-        <item>5</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
         <item>0</item>
         <item>0</item>
         <item>0</item>
@@ -90,6 +96,8 @@
     <integer name="config_deskDockKeepsScreenOn">0</integer>
     <integer name="config_carDockKeepsScreenOn">1</integer>
 
+    <!-- Default blink frequency for notification LED is 9 seconds. -->
+    <integer name="config_defaultNotificationLedOff">9000</integer>
 
     <!-- Component name of the service providing network location support. -->
     <string name="config_networkLocationProvider">com.google.android.location.NetworkLocationProvider</string>
@@ -135,12 +143,7 @@
     <string-array translatable="false" name="config_tether_wifi_regexs">
         <item>"athap0"</item>
     </string-array>
- 
- <!-- toggles weather device is tablet or phone. right now,
-    tablets are know to have soft buttons, but phones have harware
-    buttons. this might change in the future - especially when the
-    honeycomb modifications become available for phones -->
-    <bool name="cm_default_is_tablet">true</bool>
+
 
     <!-- Boolean indicating if we require the use of DUN on mobile for tethering -->
     <bool translatable="false" name="config_tether_dun_required">false</bool>
@@ -149,4 +152,21 @@
     <integer-array name="config_keyboardTapVibePattern">
         <item>30</item>
     </integer-array>
+
+    <!-- Configure rotary outer radius -->
+    <integer name="config_rotaryOuterRadiusDIP">1020</integer>
+
+    <!-- toggles weather device is tablet or phone. right now,
+    tablets are know to have soft buttons, but phones have harware
+    buttons. this might change in the future - especially when the
+    honeycomb modifications become available for phones -->
+    <bool name="cm_default_is_tablet">true</bool>
+
+    <!-- Specifies the amount of time to disable virtual keys after the screen is touched
+         in order to filter out accidental virtual key presses due to swiping gestures
+         or taps near the edge of the display.  May be 0 to disable the feature.
+         It is recommended that this value be no more than 250 ms.
+         This feature should be disabled for most devices. -->
+    <integer name="config_virtualKeyQuietTimeMillis">250</integer>
+
 </resources>

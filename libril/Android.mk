@@ -24,4 +24,4 @@ LOCAL_LDLIBS += -lpthread
 
 include $(BUILD_SHARED_LIBRARY)
 
-endif # TARGET_BOOTLOADER_BOARD_NAME==z71
+endif 
