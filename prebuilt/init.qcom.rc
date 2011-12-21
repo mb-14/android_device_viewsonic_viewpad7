@@ -24,12 +24,6 @@ on fs
     mount yaffs2 mtd@hidden /hidden nosuid nodev
     chown system hidden /hidden
     chmod 0551 /hidden
- 
- ## Copy stock files to a writeable location
-    copy /system/etc/ms3c_transformation.cfg /misc/ms3c/transformation.cf
-    copy /system/etc/ms3c_charger_offset.cfg /misc/ms3c/charger_offset.cf
-    chown system system /misc/ms3c/transformation.cf
-    chown system system /misc/ms3c/charger_offset.cf
 
 on early-init
     start hwprops
@@ -45,7 +39,8 @@ on boot
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 500000
     
     ## RIL needs this
-    mkdir /data/radio 0777
+    mkdir /data/radio 0770 radio radio
+    chown radio radio 0770 /data/radio
    
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
@@ -73,7 +68,11 @@ on boot
      ## Wifi RFKill
     chown wifi wifi /sys/class/rfkill/rfkill1/state
     chmod 0660 /sys/class/rfkill/rfkill1/state
-  
+    
+    #Set up android gadget 
+    write /sys/module/g_android/parameters/serial_number CM7-FM6
+    write /sys/module/g_android/parameters/product_id c001
+    
 
     ##Wake up source 
      chown system system /sys/power/key_wakeup

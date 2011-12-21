@@ -41,9 +41,10 @@ PRODUCT_COPY_FILES += \
     device/fih/fm6/prebuilt/init.qcom.rc:root/init.qcom.rc \
     device/fih/fm6/prebuilt/ueventd.qcom.rc:root/ueventd.qcom.rc 
 
-# Gsensor 
+# Gsensor &Ecompass
 PRODUCT_COPY_FILES += \
-    device/fih/fm6/prebuilt/app/GSensorCalibration.apk:/system/app/GSensorCalibration.apk
+    device/fih/fm6/prebuilt/app/GSensorCalibration.apk:/system/app/GSensorCalibration.apk \
+    device/fih/fm6/prebuilt/app/ECompassCalibration.apk:/system/app/ECompassCalibration.apk
 
 
 ## RIL related stuff
