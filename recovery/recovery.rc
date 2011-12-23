@@ -1,6 +1,10 @@
 on early-init
     start ueventd
 
+# Setup android gadget
+   write /sys/module/g_android/parameters/serial_number CWM-FM6
+   write /sys/module/g_android/parameters/product_id c001
+
 on init
     export PATH /sbin
     export ANDROID_ROOT /system
@@ -18,7 +22,7 @@ on init
     mkdir /data
     mkdir /cache
     mount /tmp /tmp tmpfs
-    write /sys/module/g_android/parameters/product_id c001
+    
 
 on boot
 
