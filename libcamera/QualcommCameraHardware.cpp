@@ -75,7 +75,7 @@ extern "C" {
 #define DEFAULT_PICTURE_WIDTH  1024
 #define DEFAULT_PICTURE_HEIGHT 768
 #define THUMBNAIL_BUFFER_SIZE (THUMBNAIL_WIDTH * THUMBNAIL_HEIGHT * 3/2)
-#define MAX_ZOOM_LEVEL 5
+#define MAX_ZOOM_LEVEL 20
 #define NOT_FOUND -1
 // Number of video buffers held by kernal (initially 1,2 &3)
 #define ACTIVE_VIDEO_BUFFERS 3
@@ -163,8 +163,8 @@ union zoomimage
 } zoomImage;
 
 //Default to VGA
-#define DEFAULT_PREVIEW_WIDTH 640
-#define DEFAULT_PREVIEW_HEIGHT 480
+#define DEFAULT_PREVIEW_WIDTH 480
+#define DEFAULT_PREVIEW_HEIGHT 320
 
 /*
  * Modifying preview size requires modification
@@ -207,7 +207,7 @@ board_property boardProperties[] = {
  */
 //sorted on column basis
 static const camera_size_type picture_sizes[] = {
-    { 2592, 1944 }, // 5MP
+//    { 2592, 1944 }, // 5MP
     { 2560, 1920 }, // 5MP (slightly reduced)
     { 2048, 1536 }, // 3MP QXGA
     //{ 1920, 1080 }, //HD1080
@@ -215,7 +215,7 @@ static const camera_size_type picture_sizes[] = {
     { 1280, 768 }, //WXGA
     { 1280, 720 }, //HD720
     { 1024, 768}, // 1MP XGA
-    //{ 800, 600 }, //SVGA
+//    { 800, 600 }, //SVGA
     { 800, 480 }, // WVGA
     { 640, 480 }, // VGA
     { 352, 288 }, //CIF
@@ -313,10 +313,10 @@ static const str_map effects[] = {
     { CameraParameters::EFFECT_NEGATIVE,   CAMERA_EFFECT_NEGATIVE },
     { CameraParameters::EFFECT_SOLARIZE,   CAMERA_EFFECT_SOLARIZE },
     { CameraParameters::EFFECT_SEPIA,      CAMERA_EFFECT_SEPIA },
-    { CameraParameters::EFFECT_POSTERIZE,  CAMERA_EFFECT_POSTERIZE },
-    { CameraParameters::EFFECT_WHITEBOARD, CAMERA_EFFECT_WHITEBOARD },
-    { CameraParameters::EFFECT_BLACKBOARD, CAMERA_EFFECT_BLACKBOARD },
-    { CameraParameters::EFFECT_AQUA,       CAMERA_EFFECT_AQUA }
+//    { CameraParameters::EFFECT_POSTERIZE,  CAMERA_EFFECT_POSTERIZE },
+//    { CameraParameters::EFFECT_WHITEBOARD, CAMERA_EFFECT_WHITEBOARD },
+//    { CameraParameters::EFFECT_BLACKBOARD, CAMERA_EFFECT_BLACKBOARD },
+//    { CameraParameters::EFFECT_AQUA,       CAMERA_EFFECT_AQUA }
 };
 
 // from qcamera/common/camera.h
@@ -614,8 +614,10 @@ struct SensorType {
 
 static SensorType sensorTypes[] = {
         { "5mp", 2608, 1960, true,  2592, 1944,0x00000fff },
-        { "5mp", 5184, 1944, false,  2592, 1944,0x00000fff },
+        { "5mp", 5184, 1944, true,  2592, 1944,0x00000fff }, // actual 5MP 
+        { "5mp", 2560, 1920, true,  2560, 1920,0x00000fff }, //should be 5MP 
         { "3mp", 2064, 1544, false, 2048, 1536,0x000007ff },
+        { "3mp", 4096, 1536, true, 2048, 1536,0x000007ff }, // 3MP 
         { "2mp", 3200, 1200, false, 1600, 1200,0x000007ff } };
 
 
@@ -1109,7 +1111,7 @@ void QualcommCameraHardware::initDefaultParameters()
 
     mParameters.set("luma-adaptation", "3");
     mParameters.set("zoom-supported", "true");
-    mParameters.set("zoom-ratios", "100,200,300,400,500,600");
+    mParameters.set("zoom-ratios", "100,105,110,115,120,125,130,135,140,145,150,155,160,165,170,175,180,185,190,195,200");
     mParameters.set("max-zoom", MAX_ZOOM_LEVEL);
     mParameters.set("zoom", 0);
     mParameters.set(CameraParameters::KEY_PICTURE_FORMAT,
@@ -1173,6 +1175,7 @@ void QualcommCameraHardware::findSensorType(){
         }
     }
     //default to 5 mp
+    LOGD("Failed to find a match for %d x %d, using 5M default",mDimension.raw_picture_width,mDimension.raw_picture_height);
     sensorType = sensorTypes;
     return;
 }
@@ -3052,7 +3055,7 @@ status_t QualcommCameraHardware::setParameters(const CameraParameters& params)
     if ((rc = setPictureSize(params)))  final_rc = rc;
     if ((rc = setJpegQuality(params)))  final_rc = rc;
     if ((rc = setAntibanding(params)))  final_rc = rc;
-    if ((rc = setAutoExposure(params))) final_rc = rc;
+    //if ((rc = setAutoExposure(params))) final_rc = rc;
     if ((rc = setWhiteBalance(params))) final_rc = rc;
     if ((rc = setEffect(params)))       final_rc = rc;
     if ((rc = setFlash(params)))        final_rc = rc;
@@ -4020,9 +4023,10 @@ status_t QualcommCameraHardware::setBrightness(const CameraParameters& params) {
 status_t QualcommCameraHardware::setExposureCompensation(const CameraParameters& params) {
         int expcomp = params.getInt("exposure-compensation");
 
-	    mParameters.set(CameraParameters::KEY_EXPOSURE_COMPENSATION, expcomp);
+        mParameters.set(CameraParameters::KEY_EXPOSURE_COMPENSATION, expcomp);
 
         expcomp+=2;
+
         bool ret = native_set_parm(CAMERA_SET_PARM_EXPOSURE_COMPENSATION, sizeof(expcomp),
                                        (void *)&expcomp);
 
@@ -4526,8 +4530,8 @@ static bool register_buf(int camfd,
 
     pmemBuf.active   = vfe_can_write;
 
-    LOGV("register_buf: camfd = %d, reg = %d buffer = %p",
-         camfd, !register_buffer, buf);
+    LOGV("register_buf: camfd = %d, reg = %d buffer = %p can_write = %d",
+         camfd, !register_buffer, buf, pmemBuf.active);
     if (ioctl(camfd,
               register_buffer ?
               MSM_CAM_IOCTL_REGISTER_PMEM :
