@@ -39,6 +39,7 @@ PRODUCT_COPY_FILES += \
 # Board-specific init
 PRODUCT_COPY_FILES += \
     device/fih/fm6/prebuilt/init.qcom.rc:root/init.qcom.rc \
+    device/fih/fm6/prebuilt/init.qcom.sh:root/init.qcom.sh \
     device/fih/fm6/prebuilt/ueventd.qcom.rc:root/ueventd.qcom.rc 
 
 # Gsensor &Ecompass
@@ -141,11 +142,9 @@ device/fih/fm6/prebuilt/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm
 
 #WiFi firmware
 PRODUCT_COPY_FILES += \
-    device/fih/fm6/firmware/calData_ar6102_15dBm.bin:system/wifi/calData_ar6102_15dBm.bin \
     device/fih/fm6/firmware/data.patch.hw2_0.bin:system/wifi/data.patch.hw2_0.bin \
     device/fih/fm6/firmware/athwlan.bin.z77:system/wifi/athwlan.bin.z77 \
     device/fih/fm6/firmware/eeprom.bin:system/wifi/eeprom.bin \
-    device/fih/fm6/firmware/eeprom.data:system/wifi/eeprom.data \
     device/fih/fm6/prebuilt/hostapd.conf:system/etc/wifi/hostapd.conf \
     vendor/fih/fm6/proprietary/bin/hostapd:system/bin/hostapd 
 

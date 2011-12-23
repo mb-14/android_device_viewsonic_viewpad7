@@ -60,14 +60,16 @@ on boot
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
-    mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
     #Provide the access to hostapd.conf only to root and group
     chmod 0660 /data/hostapd/hostapd.conf
-     ## Wifi RFKill
+     setprop wlan.default.dns1 168.95.1.1
+     setprop wifi.interface wlan0
+    
+   ## Wifi RFKill
     chown wifi wifi /sys/class/rfkill/rfkill1/state
-    chmod 0660 /sys/class/rfkill/rfkill1/state
+    chmod 0666 /sys/class/rfkill/rfkill1/state
     
     #Set up android gadget 
     write /sys/module/g_android/parameters/serial_number CM7-FM6
@@ -106,12 +108,9 @@ on boot
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
-on property:init.svc.bluetoothd=running
-    write /sys/devices/virtual/bluetooth/hci0/idle_timeout 7000
-    start btwlancoex
-
-on property:init.svc.bluetoothd=stopped
-    stop btwlancoex
+#on property:init.svc.bluetoothd=running
+#    write /sys/devices/virtual/bluetooth/hci0/idle_timeout 7000
+#    start abtfilt
 
 service hci_qcomm_init /system/bin/log -t qcom-bluetooth -p i "hci_qcomm_init service requested"
     user bluetooth
@@ -125,10 +124,6 @@ service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     disabled
     oneshot
 
-service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
-    user shell
-    group bluetooth net_bt_admin
-    disabled
 
 service qmuxd /system/bin/qmuxd
 
@@ -147,7 +142,12 @@ service wiperiface /system/bin/wiperiface
 
 service dhcpcd_wlan0 /system/bin/dhcpcd -B wlan0
     disabled
-    onesho
+    oneshot
+
+
+service qcom-sh /system/bin/sh /init.qcom.sh
+    user root
+    oneshot
 
 service hostapd /system/bin/logwrapper /system/bin/hostapd /data/misc/wifi/hostapd.conf
     group wifi inet

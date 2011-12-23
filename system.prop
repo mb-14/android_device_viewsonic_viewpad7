@@ -41,3 +41,4 @@ ro.hardware.respect_als=true
 # This is a high density device with more memory, so larger vm heaps for it.
 dalvik.vm.heapsize=48m
 ro.opengles.version=131072
+ro.baseband=PR3.7_128
