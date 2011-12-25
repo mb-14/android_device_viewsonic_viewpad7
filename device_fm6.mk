@@ -44,9 +44,7 @@ PRODUCT_COPY_FILES += \
 
 # Gsensor &Ecompass
 PRODUCT_COPY_FILES += \
-    device/fih/fm6/prebuilt/app/GSensorCalibration.apk:/system/app/GSensorCalibration.apk \
-    device/fih/fm6/prebuilt/app/ECompassCalibration.apk:/system/app/ECompassCalibration.apk
-
+    device/fih/fm6/prebuilt/app/GSensorCalibration.apk:/system/app/GSensorCalibration.apk 
 
 ## RIL related stuff
 PRODUCT_COPY_FILES += \
@@ -104,7 +102,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/fih/fm6/proprietary/bin/hci_qcomm_init:system/bin/hci_qcomm_init \
     vendor/fih/fm6/proprietary/bin/hciattach:system/bin/hciattach \
-    device/fih/fm6/prebuilt/bin/btwlancoex:system/bin/btwlancoex \
     device/fih/fm6/prebuilt/bin/port-bridge:system/bin/port-bridge \
     vendor/fih/fm6/proprietary/lib/libms3c_yamaha.so:system/lib/libms3c_yamaha.so \
     vendor/fih/fm6/proprietary/lib/libsensor_yamaha.so:system/lib/libsensor_yamaha.so \
@@ -137,21 +134,18 @@ PRODUCT_COPY_FILES += \
     device/fih/fm6/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     device/fih/fm6/prebuilt/7x27_kybd.kl:system/usr/keylayout/7x27_kybd.kl \
     device/fih/fm6/prebuilt/keychars/7x27_kybd.kcm.bin:system/usr/keychars/7x27_kybd.kcm.bin \
-device/fih/fm6/prebuilt/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
-device/fih/fm6/prebuilt/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin 
+    device/fih/fm6/prebuilt/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
+    device/fih/fm6/prebuilt/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin 
 
-#WiFi firmware
+
+    ## Atheros AR6002 firmware
 PRODUCT_COPY_FILES += \
-    device/fih/fm6/firmware/data.patch.hw2_0.bin:system/wifi/data.patch.hw2_0.bin \
-    device/fih/fm6/firmware/athwlan.bin.z77:system/wifi/athwlan.bin.z77 \
-    device/fih/fm6/firmware/eeprom.bin:system/wifi/eeprom.bin \
+    device/fih/fm6/firmware/data.patch.hw2_0.bin:system/etc/firmware/data.patch.hw2_0.bin \
+    device/fih/fm6/firmware/eeprom.bin:system/etc/firmware/eeprom.bin \
+    device/fih/fm6/firmware/calData_ar6102_15dBm.bin:system/etc/firmware/calData_ar6102_15dBm.bin \
+    device/fih/fm6/firmware/athwlan.bin.z77:system/etc/firmware/athwlan.bin.z77 \
     device/fih/fm6/prebuilt/hostapd.conf:system/etc/wifi/hostapd.conf \
-    vendor/fih/fm6/proprietary/bin/hostapd:system/bin/hostapd 
-
-
-#Kernel Modules
-PRODUCT_COPY_FILES += \
-    device/fih/fm6/modules/ar6000.ko:system/wifi/ar6000.ko 
+    vendor/fih/fm6/proprietary/bin/hostapd:system/bin/hostapd
 
 $(call inherit-product, build/target/product/full_base.mk)
 

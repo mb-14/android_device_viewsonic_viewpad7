@@ -162,12 +162,6 @@
     honeycomb modifications become available for phones -->
     <bool name="cm_default_is_tablet">true</bool>
 
-    <!-- Devices with WVGA resolution and mdpi density need this
-    workaround to prevent the recent applications dialog from randomly
-    using HVGA dimensions. It's likely that other high res/low dpi
-    combinations will need this too. -->
-    <bool name="cm_default_recentapps_tablet_workaround">true</bool>
-
     <!-- Specifies the amount of time to disable virtual keys after the screen is touched
          in order to filter out accidental virtual key presses due to swiping gestures
          or taps near the edge of the display.  May be 0 to disable the feature.
