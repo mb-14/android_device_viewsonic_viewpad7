@@ -56,7 +56,7 @@ if (ums == '/')
 
 char value[20];
 int fd = open("/sys/module/g_android/parameters/product_id", O_RDWR);
-int count = snprintf(value, sizeof(value), "%s\n", (enable ? "c008" : "c001"));
+int count = snprintf(value, sizeof(value), "%s\n", (enable ? "c007" : "c001"));
 write(fd, value, count);
 close(fd);
 return 0;
@@ -67,6 +67,6 @@ bool UsbController::isRNDISStarted() {
     int fd = open("/sys/module/g_android/parameters/product_id", O_RDONLY);
     read(fd, &value, 5);
     close(fd);
-    return (!strncmp(value,"c008",4) ? true : false);
+    return (!strncmp(value,"c007",4) ? true : false);
 
 }
