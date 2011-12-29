@@ -29,7 +29,7 @@ int main() {
 	close(fd);
 	fd = open("/default.prop", O_WRONLY|O_APPEND);
 	if (fd>0){
-		write(fd,"ro.baseband=",12);
+		write(fd,"gsm.version.baseband=",21);
 		write(fd,b,bc);
 		close (fd);
 	}

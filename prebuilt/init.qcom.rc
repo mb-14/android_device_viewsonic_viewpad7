@@ -103,6 +103,11 @@ on boot
     chmod 666 /sys/module/fihsensor/parameters/bMagnetStartCalibration
     chmod 666 /sys/module/fihsensor/parameters/gsensorCalibStart
     
+    chown system system /sys/class/timed_output/vibrator/enable
+    chown system system /sys/class/leds/keyboard-backlight/brightness
+    chown system system /sys/class/leds/lcd-backlight/brightness
+    chown system system /sys/class/leds/button-backlight/brightness
+
     ##SD card polling
     chown system system /sys/module/g_android/parameters/product_id
     chown system system /sys/devices/platform/msm_sdcc.1/polling
@@ -114,12 +119,6 @@ on boot
 on property:init.svc.bluetoothd=running
     write /sys/devices/virtual/bluetooth/hci0/idle_timeout 7000
     start abtfilt
-
-service hci_qcomm_init /system/bin/log -t qcom-bluetooth -p i "hci_qcomm_init service requested"
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
 
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     user bluetooth
