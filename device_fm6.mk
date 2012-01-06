@@ -6,13 +6,19 @@ DEVICE_PACKAGE_OVERLAYS += device/fih/fm6/overlay
 
 # HAL libs and other system binaries
 PRODUCT_PACKAGES += \
+                LiveWallpapers \
+                LiveWallpapersPicker \
+                MagicSmokeWallpapers \
+                VisualizationWallpapers \
+                librs_jni \
                 hwprops \
                 copybit.fm6 \
                 gralloc.fm6 \
                 gps.fm6 \
                 abtfilt \
                 libOmxVidEnc \
-                libOmxCore
+                libOmxCore 
+                
                           
 ifeq ($(TARGET_PREBUILT_KERNEL),)
     LOCAL_KERNEL := device/fih/fm6/kernel
@@ -26,11 +32,8 @@ PRODUCT_COPY_FILES += \
 
 # Live wallpaper packages
 PRODUCT_PACKAGES += \
-    LiveWallpapers \
-    LiveWallpapersPicker \
-    MagicSmokeWallpapers \
-    VisualizationWallpapers \
-    librs_jni
+  
+    
 
 # Publish that we support the live wallpaper feature.
 PRODUCT_COPY_FILES += \
@@ -38,13 +41,33 @@ PRODUCT_COPY_FILES += \
 
 # Board-specific init
 PRODUCT_COPY_FILES += \
-    device/fih/fm6/prebuilt/init.qcom.rc:root/init.qcom.rc \
-    device/fih/fm6/prebuilt/init.qcom.sh:root/init.qcom.sh \
-    device/fih/fm6/prebuilt/ueventd.qcom.rc:root/ueventd.qcom.rc 
+    device/fih/fm6/prebuilt/init.fm6.rc:root/init.fm6.rc \
+    device/fih/fm6/prebuilt/ueventd.fm6.rc:root/ueventd.fm6.rc 
 
 # Gsensor &Ecompass
 PRODUCT_COPY_FILES += \
     device/fih/fm6/prebuilt/app/GSensorCalibration.apk:/system/app/GSensorCalibration.apk 
+
+## OMX proprietaries
+PRODUCT_COPY_FILES += \
+    vendor/fih/fm6/proprietary/lib/libmm-adspsvc.so:system/lib/libmm-adspsvc.so \
+    vendor/fih/fm6/proprietary/lib/libOmxAacDec.so:system/lib/libOmxAacDec.so \
+    vendor/fih/fm6/proprietary/lib/libOmxAmrRtpDec.so:system/lib/libOmxAmrRtpDec.so \
+    vendor/fih/fm6/proprietary/lib/libOmxH264Dec.so:system/lib/libOmxH264Dec.so \
+    vendor/fih/fm6/proprietary/lib/libOmxQcelpDec.so:system/lib/libOmxQcelpDec.so \
+    vendor/fih/fm6/proprietary/lib/libOmxAacEnc.so:system/lib/libOmxAacEnc.so \
+    vendor/fih/fm6/proprietary/lib/libOmxAmrwbDec.so:system/lib/libOmxAmrwbDec.so \
+    vendor/fih/fm6/proprietary/lib/libOmxMp3Dec.so:system/lib/libOmxMp3Dec.so \
+    vendor/fih/fm6/proprietary/lib/libOmxVidEnc.so:system/lib/libOmxVidEnc.so \
+    vendor/fih/fm6/proprietary/lib/libOmxAmrDec.so:system/lib/libOmxAmrDec.so \
+    vendor/fih/fm6/proprietary/lib/libOmxEvrcDec.so:system/lib/libOmxEvrcDec.so \
+    vendor/fih/fm6/proprietary/lib/libOmxMpeg4Dec.so:system/lib/libOmxMpeg4Dec.so \
+    vendor/fih/fm6/proprietary/lib/libOmxWmaDec.so:system/lib/libOmxWmaDec.so \
+    vendor/fih/fm6/proprietary/lib/libOmxAmrEnc.so:system/lib/libOmxAmrEnc.so \
+    vendor/fih/fm6/proprietary/lib/libOmxEvrcEnc.so:system/lib/libOmxEvrcEnc.so \
+    vendor/fih/fm6/proprietary/lib/libOmxQcelp13Enc.so:system/lib/libOmxQcelp13Enc.so \
+    vendor/fih/fm6/proprietary/lib/libOmxWmvDec.so:system/lib/libOmxWmvDec.so
+
 
 ## RIL related stuff
 PRODUCT_COPY_FILES += \
@@ -116,8 +139,6 @@ PRODUCT_COPY_FILES += \
     device/fih/fm6/prebuilt/AudioFilter.csv:system/etc/AudioFilter.csv \
     vendor/fih/fm6/proprietary/lib/liba2dp.so:system/lib/liba2dp.so \
     vendor/fih/fm6/proprietary/lib/libaudioeq.so:system/lib/libaudioeq.so \
-    vendor/fih/fm6/proprietary/lib/libaudiopolicy.so:system/lib/libaudiopolicy.so \
-    vendor/fih/fm6/proprietary/lib/libaudio.so:system/lib/libaudio.so \
     vendor/fih/fm6/proprietary/lib/egl/egl.cfg:system/lib/egl/egl.cfg \
     vendor/fih/fm6/proprietary/lib/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \
     vendor/fih/fm6/proprietary/lib/egl/libq3dtools_adreno200.so:system/lib/egl/libq3dtools_adreno200.so \
@@ -132,10 +153,7 @@ PRODUCT_COPY_FILES += \
     device/fih/fm6/prebuilt/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
     device/fih/fm6/prebuilt/vold.fstab:system/etc/vold.fstab \
     device/fih/fm6/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    device/fih/fm6/prebuilt/7x27_kybd.kl:system/usr/keylayout/7x27_kybd.kl \
-    device/fih/fm6/prebuilt/keychars/7x27_kybd.kcm.bin:system/usr/keychars/7x27_kybd.kcm.bin \
-    device/fih/fm6/prebuilt/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
-    device/fih/fm6/prebuilt/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin 
+    device/fih/fm6/prebuilt/7x27_kybd.kl:system/usr/keylayout/7x27_kybd.kl 
 
 
     ## Atheros AR6002 firmware

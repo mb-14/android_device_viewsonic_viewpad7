@@ -23,14 +23,15 @@ key 8     7
 key 9     8
 key 10    9
 key 11    0
-key 158   BACK
-key 230   HOME		    WAKE_DROPPED
+key 158   BACK              VIRTUAL
+key 102   HOME		    VIRTUAL
+key 229   MENU              VIRTUAL
+key 217   SEARCH            VIRTUAL
 key 60    SOFT_RIGHT        WAKE
 key 107   ENDCALL           WAKE_DROPPED
 key 62    ENDCALL           WAKE_DROPPED
-key 229   MENU         WAKE_DROPPED
-key 59    MENU         WAKE_DROPPED
-key 139   MENU              WAKE_DROPPED
+key 59    MENU              VIRTUAL
+key 139   MENU              VIRTUAL
 key 228   POUND
 key 231   CALL              WAKE_DROPPED
 key 61    CALL              WAKE_DROPPED
@@ -90,23 +91,3 @@ key 100   ALT_RIGHT
 
 key 399   GRAVE
 
-# F9XX for mapping CAMERA KEY,               Revised by PeterKCTseng @20090522
-key 212   CAMERA
-
-# F9XX for mapping FOCUS KEY,               Revised by PeterKCTseng @20090522
-key 183   FOCUS
-
-# F9XX for mapping SEARCH KEY,              Revised by PeterKCTseng @20090522
-key 217	  SEARCH
-key 58	  SHIFT_LEFT
-
-# F9XX for mapping RING_SWITCH,             Revised by PeterKCTseng @20090522
-key 184 RING_SWITCH        WAKE
-
-# F9XX for mapping HEADSETHOOK KEY,         Revised by PeterKCTseng @20090522
-key 227   HEADSETHOOK
-# F9XX for mapping BROWSER KEY,         Revised by TeddyYang @20090723
-key 192   BROWSER
-
-# F9XX/FST for mapping BACK COVER KEY,         Revised by NicoleWeng @20100526
-key 193   BACK_COVER	WAKE

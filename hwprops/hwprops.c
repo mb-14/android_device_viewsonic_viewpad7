@@ -33,16 +33,9 @@ int main() {
 		write(fd,b,bc);
 		close (fd);
 	}
-
-	fd = open("/proc/serialnumber",O_RDONLY);
-	if (fd<0)
-		return 0;
-
-	bc = read(fd, b, sizeof(b)-1);
-	close(fd);
-	fd = open("/default.prop", O_WRONLY|O_APPEND);
+        fd = open("/default.prop", O_WRONLY|O_APPEND);
 	if (fd>0){
-		write(fd,"ro.serialno=",12);
+		write(fd,"ro.baseband=",12);
 		write(fd,b,bc);
 		close (fd);
 	}
