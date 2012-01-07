@@ -88,9 +88,9 @@ struct board_property{
 #define JPEG_EVENT_DONE 0
 #define CAM_CTRL_SUCCESS 1
 
-#define MINIMUM_FPS 10
+#define MINIMUM_FPS 5
 #define DEFAULT_FPS 15
-#define MAXIMUM_FPS 25
+#define MAXIMUM_FPS 30
 
 typedef struct {
 	unsigned int in1_w;
