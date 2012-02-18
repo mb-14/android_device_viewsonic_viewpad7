@@ -18,7 +18,7 @@ TARGET_OTA_ASSERT_DEVICE := fm6,viewpad7,vt100
 
 #kernel
 TARGET_PREBUILT_KERNEL := device/fih/fm6/kernel
-BOARD_KERNEL_CMDLINE := mem=464M console=null androidboot.hardware=fm6 
+BOARD_KERNEL_CMDLINE := mem=464M console=null androidboot.hardware=qcom
 BOARD_KERNEL_BASE := 0x13000000
 BOARD_PAGE_SIZE := 0x00000800
 

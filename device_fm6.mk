@@ -41,8 +41,8 @@ PRODUCT_COPY_FILES += \
 
 # Board-specific init
 PRODUCT_COPY_FILES += \
-    device/fih/fm6/prebuilt/init.fm6.rc:root/init.fm6.rc \
-    device/fih/fm6/prebuilt/ueventd.fm6.rc:root/ueventd.fm6.rc 
+    device/fih/fm6/prebuilt/init.qcom.rc:root/init.qcom.rc \
+    device/fih/fm6/prebuilt/ueventd.qcom.rc:root/ueventd.qcom.rc 
 
 # Gsensor &Ecompass
 PRODUCT_COPY_FILES += \
