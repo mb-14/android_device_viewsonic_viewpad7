@@ -33,7 +33,6 @@ ro.telephony.call_ring.delay=1000
 
 # Respect ALS setting, turn it off if not in use
 ro.hardware.respect_als=true
-debug.sf.hw=0
+debug.sf.hw=1
 keyguard.no_require_sim=true
 DEVICE_PROVISIONED=1
-ro.sf.lcd_density=165

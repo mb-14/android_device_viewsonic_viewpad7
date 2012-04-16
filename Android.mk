@@ -13,5 +13,5 @@
 # limitations under the License.
 
 ifeq ($(TARGET_DEVICE),fm6)
-    include $(call all-named-subdir-makefiles, recovery libaudio libril libcamera libgralloc libcopybit hwprops)
+    include $(call first-makefiles-under,$(call my-dir))
 endif

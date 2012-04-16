@@ -1,11 +1,11 @@
 USE_CAMERA_STUB := false
-
+TARGET_SPECIFIC_HEADER_PATH := device/fih/fm6/include
 #CPU
 TARGET_BOARD_PLATFORM := msm7k
-TARGET_ARCH_VARIANT := armv6-vfp
 TARGET_CPU_ABI := armeabi
-TARGET_CPU_ABI := armeabi-v6l
-TARGET_CPU_ABI2 := armeabi
+TARGET_ARCH_VARIANT := armv6-vfp
+TARGET_BOARD_PLATFORM := msm7k
+TARGET_CPU_ABI := armeabi
 TARGET_BOOTLOADER_BOARD_NAME := fm6
 
 # fix this up by examining /proc/mtd on a running device
@@ -18,7 +18,7 @@ TARGET_OTA_ASSERT_DEVICE := fm6,viewpad7,vt100
 
 #kernel
 TARGET_PREBUILT_KERNEL := device/fih/fm6/kernel
-BOARD_KERNEL_CMDLINE := mem=464M console=null androidboot.hardware=qcom
+BOARD_KERNEL_CMDLINE := mem=464M console=null androidboot.hardware=qcom no_console_suspend
 BOARD_KERNEL_BASE := 0x13000000
 BOARD_PAGE_SIZE := 0x00000800
 
@@ -56,19 +56,15 @@ TARGET_PROVIDES_LIBRIL := true
 BOARD_USES_GENERIC_AUDIO := false
 TARGET_PROVIDES_LIBAUDIO := true
 
-#BOARD_PREBUILT_LIBAUDIO := true
-# Use dirty hack to allow froyo libaudio
-#BOARD_USE_KINETO_COMPATIBILITY := true
-#BOARD_USES_FROYO_AUDIOPOLICY := true
 
 #Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 
 
 # Graphics
+BOARD_EGL_CFG := device/fih/fm6/prebuilt/egl.cfg
 TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
-BOARD_NO_RGBX_8888 := true
 JS_ENGINE := v8
 
 #Sensors

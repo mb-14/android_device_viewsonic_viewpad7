@@ -208,7 +208,7 @@ board_property boardProperties[] = {
 //sorted on column basis
 static const camera_size_type picture_sizes[] = {
     //{ 2592, 1944 }, // 5MP
-    //{ 2560, 1920 }, // 5MP (slightly reduced)
+    { 2560, 1920 }, // 5MP (slightly reduced)
     { 2048, 1536 }, // 3MP QXGA
     //{ 1920, 1080 }, //HD1080
     { 1600, 1200 }, // 2MP UXGA
@@ -312,7 +312,11 @@ static const str_map effects[] = {
     { CameraParameters::EFFECT_MONO,       CAMERA_EFFECT_MONO },
     { CameraParameters::EFFECT_NEGATIVE,   CAMERA_EFFECT_NEGATIVE },
     { CameraParameters::EFFECT_SOLARIZE,   CAMERA_EFFECT_SOLARIZE },
-    { CameraParameters::EFFECT_SEPIA,      CAMERA_EFFECT_SEPIA }
+    { CameraParameters::EFFECT_SEPIA,      CAMERA_EFFECT_SEPIA },
+    { CameraParameters::EFFECT_POSTERIZE,  CAMERA_EFFECT_POSTERIZE },
+    { CameraParameters::EFFECT_WHITEBOARD, CAMERA_EFFECT_WHITEBOARD },
+    { CameraParameters::EFFECT_BLACKBOARD, CAMERA_EFFECT_BLACKBOARD },
+    { CameraParameters::EFFECT_AQUA,       CAMERA_EFFECT_AQUA }
 };
 
 // from qcamera/common/camera.h
@@ -3094,7 +3098,7 @@ extern "C" sp<CameraHardwareInterface> openCameraHardware()
 static CameraInfo sCameraInfo[] = {
 	{
 		CAMERA_FACING_BACK,
-		90,  /* orientation */
+		0,  /* orientation */
 	}
 };
 
