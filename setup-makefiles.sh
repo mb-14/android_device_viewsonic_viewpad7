@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-DEVICE=fm6
-MANUFACTURER=fih
+DEVICE=viewpad7
+MANUFACTURER=viewsonic
 
 mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE
 

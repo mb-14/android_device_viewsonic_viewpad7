@@ -14,8 +14,6 @@ lib/egl/libGLESv1_CM_adreno200.so
 lib/egl/libGLESv2_adreno200.so
 lib/egl/libq3dtools_adreno200.so
 
-lib/hw/lights.qcom.so
-
 lib/hw/sensors.qcom.so
 
 lib/liba2dp.so
@@ -41,7 +39,6 @@ lib/libqmi.so
 lib/libqueue.so
 lib/libril-qc-1.so
 lib/libril-qcril-hook-oem.so
-lib/libril.so
 lib/libwms.so
 lib/libwmsts.so
 

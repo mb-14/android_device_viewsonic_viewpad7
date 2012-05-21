@@ -51,7 +51,6 @@ failed ()
 start_hciattach ()
 {
   echo 1 > $BLUETOOTH_SLEEP_PATH
-#  /system/bin/hciattach -n $BTS_DEVICE $BTS_TYPE $BTS_BAUD &
   /system/bin/hciattach -n $QSOC_DEVICE $QSOC_TYPE $QSOC_BAUD &
 
   hciattach_pid=$!
@@ -84,8 +83,7 @@ shift $(($OPTIND-1))
 # Note that "hci_qcomm_init -e" prints expressions to set the shell variables
 # BTS_DEVICE, BTS_TYPE, BTS_BAUD, and BTS_ADDRESS.
 
-#eval $(/system/bin/hci_qcomm_init -e && echo "exit_code_hci_qcomm_init=0" || echo "exit_code_hci_qcomm_init=1")
-#eval $(/system/bin/hci_qcomm_init && echo "exit_code_hci_qcomm_init=0" || echo "exit_code_hci_qcomm_init=1")
+
 QSOC_DEVICE=${1:-"/dev/ttyHS0"}
 QSOC_TYPE=${2:-"any"}
 QSOC_BAUD=${3:-"3000000"}

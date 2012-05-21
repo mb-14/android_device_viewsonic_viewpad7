@@ -2,7 +2,7 @@ on early-init
     start ueventd
 
 # Setup android gadget
-   write /sys/module/g_android/parameters/serial_number CWM-FM6
+   write /sys/module/g_android/parameters/serial_number CWM-Viewpad7
    write /sys/module/g_android/parameters/product_id c001
 
 on init

@@ -1,12 +1,13 @@
 USE_CAMERA_STUB := false
-TARGET_SPECIFIC_HEADER_PATH := device/fih/fm6/include
+TARGET_SPECIFIC_HEADER_PATH := device/viewsonic/viewpad7/include
 #CPU
+TARGET_NO_BOOTLOADER := true
 TARGET_BOARD_PLATFORM := msm7k
 TARGET_CPU_ABI := armeabi
 TARGET_ARCH_VARIANT := armv6-vfp
 TARGET_BOARD_PLATFORM := msm7k
 TARGET_CPU_ABI := armeabi
-TARGET_BOOTLOADER_BOARD_NAME := fm6
+TARGET_BOOTLOADER_BOARD_NAME := viewpad7
 
 # fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00500000
@@ -14,22 +15,22 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00500000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x0a000000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x0ab80000
 BOARD_FLASH_BLOCK_SIZE := 131072
-TARGET_OTA_ASSERT_DEVICE := fm6,viewpad7,vt100
+TARGET_OTA_ASSERT_DEVICE := viewpad7,ViewPad7,fm6
 
 #kernel
-TARGET_PREBUILT_KERNEL := device/fih/fm6/kernel
-BOARD_KERNEL_CMDLINE := mem=464M console=null androidboot.hardware=qcom no_console_suspend
+TARGET_PREBUILT_KERNEL := device/viewsonic/viewpad7/kernel
+BOARD_KERNEL_CMDLINE := mem=464M console=console=ttyMSM2,115200n8 androidboot.hardware=qcom no_console_suspend
 BOARD_KERNEL_BASE := 0x13000000
 BOARD_PAGE_SIZE := 0x00000800
 
 #Recovery
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/fih/fm6/recovery/recovery_ui.c
-TARGET_RECOVERY_INITRC := device/fih/fm6/recovery/recovery.rc
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/viewsonic/viewpad7/recovery/recovery_ui.c
+TARGET_RECOVERY_INITRC := device/viewsonic/viewpad7/recovery/recovery.rc
 
 #GPS
 BOARD_GPS_LIBRARIES := libloc_api
 BOARD_USES_QCOM_GPS := true
-BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := fm6
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := viewpad7
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
 
 
@@ -59,10 +60,10 @@ TARGET_PROVIDES_LIBAUDIO := true
 
 #Bluetooth
 BOARD_HAVE_BLUETOOTH := true
-
+BOARD_HAVE_BLUETOOTH_CUSTOM_HCIATTACH := true
 
 # Graphics
-BOARD_EGL_CFG := device/fih/fm6/prebuilt/egl.cfg
+BOARD_EGL_CFG := device/viewsonic/viewpad7/prebuilt/egl.cfg
 TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 JS_ENGINE := v8

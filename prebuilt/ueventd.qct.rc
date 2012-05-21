@@ -11,4 +11,4 @@
 /dev/cm3602_alsps         0666   compass    system
 /dev/ttyHS0               0660   bluetooth  bluetooth
 /dev/ttyGS0               0660   radio      radio
-
+/dev/dun		  0660	 radio      radio
