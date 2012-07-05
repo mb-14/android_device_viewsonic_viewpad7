@@ -2,8 +2,11 @@
 
 ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),viewpad7)
 
+MODULE.TARGET.SHARED_LIBRARIES.libril :=
+
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
+
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_SRC_FILES:= \
@@ -24,4 +27,4 @@ LOCAL_LDLIBS += -lpthread
 
 include $(BUILD_SHARED_LIBRARY)
 
-endif # TARGET_BOOTLOADER_BOARD_NAME==viewpad7
+endif # TARGET_BOOTLOADER_BOARD_NAME

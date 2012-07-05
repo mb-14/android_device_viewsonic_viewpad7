@@ -55,7 +55,9 @@ on boot
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
     chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
     
-    
+    chown system system /sys/bus/platform/devices/msm_sdcc.1/polling
+    chown system system /sys/bus/platform/devices/msm_sdcc.2/polling
+    chown system system /sys/bus/platform/devices/msm_sdcc.3/polling
    
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -97,13 +99,7 @@ on boot
 
 on property:init.svc.bluetoothd=running
     write /sys/devices/virtual/bluetooth/hci0/idle_timeout 7000
-    start btwlancoex
-
-on property:init.svc.bluetoothd=stopped
-    stop btwlancoex
-
-on property:init.svc.bluetoothd=stopped
-    stop abtfilt
+    start abtfilt
 
 service hci_qcomm_init /system/bin/log -t qcom-bluetooth -p i "hci_qcomm_init service requested"
     user bluetooth
@@ -121,6 +117,13 @@ service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
 service qmuxd /system/bin/qmuxd
     user radio
     group radio
+
+#port-bridge
+    chmod 0660 /dev/smd0
+    chown system system /dev/smd0
+
+    chmod 0660 /dev/ttyGS0
+    chown system system /dev/ttyGS0
 
 service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyGS0
 
@@ -154,11 +157,5 @@ service iprenew_wlan0 /system/bin/dhcpcd -n wlan0
     oneshot
 
 service abtfilt /system/bin/abtfilt -c -d -z -n
-    disabled
-    oneshot
-
-service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
-    user root
-    group qcom_oncrpc bluetooth net_bt_admin
     disabled
     oneshot

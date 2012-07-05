@@ -26,4 +26,4 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 dev_mount sdcard /mnt/sdcard auto /devices/platform/msm_sdcc.1/mmc_host
-dev_mount usbhost /mnt/media/disk auto /devices/platform/msm_hsusb_host.0/usb1
+dev_mount usbdisk /mnt/usbdisk auto /devices/platform/msm_hsusb_host.0/usb1

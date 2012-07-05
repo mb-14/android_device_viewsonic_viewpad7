@@ -40,7 +40,8 @@ PRODUCT_COPY_FILES += \
 # Board-specific init
 PRODUCT_COPY_FILES += \
     device/viewsonic/viewpad7/prebuilt/init.qcom.rc:root/init.qcom.rc \
-    device/viewsonic/viewpad7/prebuilt/ueventd.qct.rc:root/ueventd.qct.rc 
+    device/viewsonic/viewpad7/prebuilt/ueventd.qct.rc:root/ueventd.qct.rc \
+    device/viewsonic/viewpad7/prebuilt/ueventd.qcom.rc:root/ueventd.qcom.rc
  
 
 ## Hardware properties 
@@ -63,8 +64,6 @@ PRODUCT_COPY_FILES += \
     
 
 PRODUCT_COPY_FILES += \
-    device/viewsonic/viewpad7/prebuilt/etc/gps.conf:/system/etc/gps.conf \
-    device/viewsonic/viewpad7/prebuilt/etc/loc_parameter.ini:/system/etc/loc_parameter.ini \
     device/viewsonic/viewpad7/prebuilt/ms3c_transformation.cfg:system/etc/ms3c_transformation.cfg \
     device/viewsonic/viewpad7/prebuilt/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
     device/viewsonic/viewpad7/prebuilt/bin/port-bridge:system/bin/port-bridge \
@@ -77,7 +76,6 @@ PRODUCT_COPY_FILES += \
     device/viewsonic/viewpad7/prebuilt/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
     device/viewsonic/viewpad7/prebuilt/vold.fstab:system/etc/vold.fstab \
     device/viewsonic/viewpad7/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-device/viewsonic/viewpad7/prebuilt/GooManager.apk:system/app/GooManager.apk \
     device/viewsonic/viewpad7/prebuilt/7x27_kybd.kl:system/usr/keylayout/7x27_kybd.kl  
      
 
@@ -101,14 +99,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapsize=32m \
     ro.opengles.version=131072 
-   
-#GooManager Support:
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.goo.developerid=mb-14 \
-    ro.goo.rom=CM7Viewpad7 \
-    ro.goo.board=viewpad7 \
-    ro.goo.version=$(shell date +%s)
 
+# Compcache properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.compcache.default=18
+
+# Extended JNI checks
+# The extended JNI checks will cause the system to run more slowly, but they can spot a variety of nasty bugs 
+# before they have a chance to cause problems.
+# Default=true for development builds, set by android buildsystem.
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.kernel.android.checkjni=0 \
+    dalvik.vm.checkjni=false
+   
 $(call inherit-product, build/target/product/full_base.mk)
 
 $(call inherit-product-if-exists, vendor/viewsonic/viewpad7/viewpad7-vendor.mk)

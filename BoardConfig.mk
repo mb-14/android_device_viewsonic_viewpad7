@@ -1,4 +1,6 @@
 USE_CAMERA_STUB := false
+BOARD_USE_FROYO_LIBCAMERA := true
+
 TARGET_SPECIFIC_HEADER_PATH := device/viewsonic/viewpad7/include
 #CPU
 TARGET_NO_BOOTLOADER := true
@@ -67,6 +69,7 @@ BOARD_EGL_CFG := device/viewsonic/viewpad7/prebuilt/egl.cfg
 TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 JS_ENGINE := v8
+TARGET_ELECTRONBEAM_FRAMES := 6
 
 #Sensors
 TARGET_USES_OLD_LIBSENSORS_HAL:=true

@@ -124,20 +124,20 @@ uint32_t AudioPolicyManager::getDeviceForStrategy(routing_strategy strategy, boo
     break;
 
     case STRATEGY_SONIFICATION:
-    case STRATEGY_MEDIA_SONIFICATION:
-
-        // If incall, just select the STRATEGY_PHONE device: The rest of the behavior is handled by
-        // handleIncallSonification().
-        if ((mPhoneState == AudioSystem::MODE_IN_CALL) || (mPhoneState == AudioSystem::MODE_RINGTONE)) {
-            device = getDeviceForStrategy(STRATEGY_PHONE, false);
-            break;
-        }
         device = mAvailableOutputDevices & AudioSystem::DEVICE_OUT_SPEAKER;
         if (device == 0) {
             LOGE("getDeviceForStrategy() speaker device not found");
         }
         // The second device used for sonification is the same as the device used by media strategy
         // FALL THROUGH
+
+    case STRATEGY_MEDIA_SONIFICATION:
+        // If incall, just select the STRATEGY_PHONE device: The rest of the behavior is handled by
+        // handleIncallSonification().
+        if (mPhoneState == AudioSystem::MODE_IN_CALL) {
+            device = getDeviceForStrategy(STRATEGY_PHONE, false);
+            break;
+        }
 
     case STRATEGY_MEDIA: {
         uint32_t device2 = mAvailableOutputDevices & AudioSystem::DEVICE_OUT_AUX_DIGITAL;
